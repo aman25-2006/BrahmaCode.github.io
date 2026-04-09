@@ -18,7 +18,10 @@
   </head>
   <body>
     <header class="top-nav">
-      <a class="brand" href="#home">Brahma<span>Code</span></a>
+      <a class="brand" href="#home">
+        <img src="assets/brahmacode-logo.svg" alt="BrahmaCode logo" class="brand-logo" />
+        <span class="brand-text">Brahma<span>Code</span></span>
+      </a>
       <button
         class="menu-toggle"
         id="menu-toggle"
@@ -34,6 +37,7 @@
         <a href="#features">Features</a>
         <a href="courses.html">Courses</a>
         <a href="ask-doubt.html">Ask Doubt</a>
+        <a href="admin-login.html">Admin</a>
         <a href="#pricing">Pricing</a>
       </nav>
     </header>
@@ -41,8 +45,8 @@
     <main id="home" class="page-wrap">
       <section class="hero section reveal">
         <p class="tiny-label">student-first coding space • clear bilingual support</p>
-        <h1>Learn. Practice. Grow.</h1>
-        <p class="hero-subtext">
+        <h1 data-edit-key="home.heroTitle">Learn. Practice. Grow.</h1>
+        <p class="hero-subtext" data-edit-key="home.heroSubtext">
           BrahmaCode is a student-first platform where coding is not just
           theory, it becomes daily progress. Ask doubts, solve DSA problems,
           and move your learning journey with a clear direction.
@@ -52,7 +56,7 @@
           <a class="btn btn-muted" href="ask-doubt.html">Ask a Doubt</a>
         </div>
         <div class="hero-note">
-          <span>Built for students who feel coding is tough, but still show up.</span>
+          <span data-edit-key="home.heroNote">Built for students who feel coding is tough, but still show up.</span>
         </div>
       </section>
 
@@ -249,5 +253,6 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="admin.js"></script>
   </body>
 </html>

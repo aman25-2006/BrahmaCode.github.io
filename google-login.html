@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Google Login (Dummy) | BrahmaCode</title>
+    <meta name="description" content="Dummy Google login page for BrahmaCode admin demo." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="admin-shell">
+      <section class="admin-card reveal">
+        <h1>Google Sign In (Dummy)</h1>
+        <p class="admin-sub">
+          This is a demo-only Google login screen for the static site.
+        </p>
+
+        <form id="google-dummy-form" class="admin-form">
+          <label for="google-email">Google account</label>
+          <input id="google-email" type="email" value="amankumar0123@gmail.com" required />
+
+          <label for="google-name">Display name</label>
+          <input id="google-name" type="text" value="Aman Kumar" required />
+
+          <button type="submit" class="btn btn-primary">Continue</button>
+          <a class="btn btn-muted" href="admin-login.html">Cancel</a>
+
+          <p id="google-note" class="form-note">No real OAuth is used on this demo page.</p>
+        </form>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

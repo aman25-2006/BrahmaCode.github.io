@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Panel | BrahmaCode</title>
+    <meta name="description" content="BrahmaCode admin panel for managing admins and editable content." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="page-wrap section">
+      <section class="admin-top reveal">
+        <div>
+          <h1>Admin Panel</h1>
+          <p id="session-user" class="admin-sub">Logged in as: -</p>
+        </div>
+        <div class="admin-top-actions">
+          <a href="index.html" class="btn btn-muted">Open Website</a>
+          <button id="logout-btn" class="btn btn-primary" type="button">Logout</button>
+        </div>
+      </section>
+
+      <section class="admin-grid section reveal">
+        <article class="admin-block">
+          <h2>Manage Admins</h2>
+          <p class="admin-sub">Create another admin who can log in and edit content.</p>
+
+          <form id="add-admin-form" class="admin-form compact">
+            <label for="new-admin-id">New admin ID</label>
+            <input id="new-admin-id" type="text" required />
+
+            <label for="new-admin-password">New admin password</label>
+            <input id="new-admin-password" type="password" required />
+
+            <button type="submit" class="btn btn-primary">Add Admin</button>
+            <p id="admin-manage-note" class="form-note"></p>
+          </form>
+
+          <div id="admin-list" class="admin-list"></div>
+        </article>
+
+        <article class="admin-block">
+          <h2>Website Text Editor</h2>
+          <p class="admin-sub">
+            Update key homepage/course texts. Changes apply on refresh for this browser.
+          </p>
+
+          <form id="content-form" class="admin-form compact">
+            <label for="home-title">Home Hero Title</label>
+            <textarea id="home-title" data-content-key="home.heroTitle" rows="2"></textarea>
+
+            <label for="home-subtext">Home Hero Subtext</label>
+            <textarea id="home-subtext" data-content-key="home.heroSubtext" rows="4"></textarea>
+
+            <label for="home-note">Home Hero Note</label>
+            <textarea id="home-note" data-content-key="home.heroNote" rows="2"></textarea>
+
+            <label for="courses-title">Courses Hero Title</label>
+            <textarea id="courses-title" data-content-key="courses.heroTitle" rows="2"></textarea>
+
+            <label for="courses-subtext">Courses Hero Subtext</label>
+            <textarea id="courses-subtext" data-content-key="courses.heroSubtext" rows="4"></textarea>
+
+            <label for="doubt-title">Ask Doubt Hero Title</label>
+            <textarea id="doubt-title" data-content-key="doubt.heroTitle" rows="2"></textarea>
+
+            <button type="submit" class="btn btn-primary">Save Content</button>
+            <button type="button" id="reset-content-btn" class="btn btn-muted">Reset to Default</button>
+            <p id="content-note" class="form-note"></p>
+          </form>
+        </article>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

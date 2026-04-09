@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Login | BrahmaCode</title>
+    <meta name="description" content="Admin access for BrahmaCode content management." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="admin-shell">
+      <section class="admin-card reveal">
+        <img src="assets/brahmacode-logo.svg" alt="BrahmaCode logo" class="admin-logo" />
+        <h1>Admin Login</h1>
+        <p class="admin-sub">
+          Demo admin access for content updates. Use your credentials to enter the panel.
+        </p>
+
+        <form id="admin-login-form" class="admin-form">
+          <label for="admin-id">Admin ID</label>
+          <input id="admin-id" name="admin-id" type="text" placeholder="amankumar0123" required />
+
+          <label for="admin-password">Password</label>
+          <input id="admin-password" name="admin-password" type="password" placeholder="aman1234" required />
+
+          <button type="submit" class="btn btn-primary">Login</button>
+          <a class="btn btn-muted" href="google-login.html">Login with Google (Dummy)</a>
+
+          <p id="admin-login-note" class="form-note">Default admin credentials are pre-configured.</p>
+        </form>
+
+        <a class="back-link" href="index.html">Back to website</a>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>
