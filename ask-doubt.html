@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ask a Doubt | BrahmaCode</title>
+    <meta
+      name="description"
+      content="Submit coding doubts to BrahmaCode mentors and get Hindi-English friendly guidance."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="top-nav">
+      <a class="brand" href="index.html">Brahma<span>Code</span></a>
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        Menu
+      </button>
+      <nav id="main-nav">
+        <a href="index.html#problems">Problems</a>
+        <a href="index.html#solution">Solution</a>
+        <a href="index.html#features">Features</a>
+        <a href="courses.html">Courses</a>
+        <a href="ask-doubt.html">Ask Doubt</a>
+        <a href="index.html#pricing">Pricing</a>
+      </nav>
+    </header>
+
+    <main class="page-wrap">
+      <section class="hero section reveal">
+        <p class="tiny-label">mentor support • no judgement zone</p>
+        <h1>Stuck ho? Doubt bhejo, saath mein solve karte hain.</h1>
+        <p class="hero-subtext">
+          Agar code run nahi ho raha, logic crack nahi ho raha, ya roadmap clear
+          nahi hai - just ask. Hamari team practical way mein explain karti hai,
+          bina unnecessary complexity ke.
+        </p>
+      </section>
+
+      <section class="section reveal odd-shift">
+        <div class="section-intro">
+          <h2>Doubt Form</h2>
+          <p>Jitna context doge, utna fast aur accurate answer milega.</p>
+        </div>
+
+        <!-- Realistic simple form, no fake backend promise -->
+        <form class="doubt-form" id="doubt-form">
+          <label for="student-name">Your name</label>
+          <input id="student-name" name="student-name" type="text" placeholder="Aman / Priya / your name" required />
+
+          <label for="student-level">Current level</label>
+          <select id="student-level" name="student-level" required>
+            <option value="">Select one</option>
+            <option>School learner</option>
+            <option>College beginner</option>
+            <option>Intermediate (DSA/Web)</option>
+          </select>
+
+          <label for="doubt-topic">Topic</label>
+          <input id="doubt-topic" name="doubt-topic" type="text" placeholder="Binary Search / JavaScript / Recursion" required />
+
+          <label for="doubt-desc">What exactly is stuck?</label>
+          <textarea id="doubt-desc" name="doubt-desc" rows="6" placeholder="Example: maine dry run kiya but edge case handle nahi ho raha..." required></textarea>
+
+          <label for="code-link">Code link (optional)</label>
+          <input id="code-link" name="code-link" type="url" placeholder="GitHub / Replit / Pastebin" />
+
+          <button type="submit" class="btn btn-primary">Send Doubt</button>
+          <p class="form-note" id="form-note">We usually reply within 24 hours on active days.</p>
+        </form>
+      </section>
+
+      <section class="section reveal odd-shift-light">
+        <div class="section-intro">
+          <h2>Quick Contact Options</h2>
+          <p>Urgent issue ho toh direct ping bhi kar sakte ho.</p>
+        </div>
+
+        <div class="feature-cards">
+          <article class="fcard misaligned-1">
+            <div class="icon">📱</div>
+            <h3>WhatsApp Help</h3>
+            <p>Batch doubts aur assignment confusion ke liye quick support.</p>
+          </article>
+          <article class="fcard misaligned-2">
+            <div class="icon">🎧</div>
+            <h3>Voice Doubt Slot</h3>
+            <p>Hard logic concepts ko 10-min guided call mein clear karo.</p>
+          </article>
+          <article class="fcard misaligned-3">
+            <div class="icon">🧩</div>
+            <h3>Debug Together</h3>
+            <p>Screen share style walkthrough on selected student requests.</p>
+          </article>
+          <article class="fcard misaligned-4">
+            <div class="icon">🕒</div>
+            <h3>Response Window</h3>
+            <p>Usually 4pm-10pm IST, exam season mein extended slots.</p>
+          </article>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer section page-wrap">
+      <p class="founder">Founder: Aman Kumar</p>
+      <div class="socials">
+        <a href="https://www.linkedin.com/company/brahmacode" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.instagram.com/brahmacode" aria-label="Instagram" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://x.com/brahmacode" aria-label="X" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="https://www.facebook.com/brahmacode" aria-label="Facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+      </div>
+      <p class="copy">BrahmaCode © 2026 • Ask freely, learn deeply.</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
