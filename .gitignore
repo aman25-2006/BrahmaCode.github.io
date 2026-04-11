@@ -1,0 +1,4 @@
+firebase-secrets.js
+*.local
+*.env
+*.env.*

@@ -329,6 +329,9 @@ async function initAdminPanel() {
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
+  if (window.BRAHMACODE_FIREBASE_READY) {
+    await window.BRAHMACODE_FIREBASE_READY;
+  }
   await applyContentOverrides();
   await initAdminLogin();
   initGoogleDummy();

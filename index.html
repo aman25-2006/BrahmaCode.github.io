@@ -32,12 +32,13 @@
         Menu
       </button>
       <nav id="main-nav">
-        <a href="#problems">Problems</a>
-        <a href="#solution">Solution</a>
+        <a href="#batches">Batches</a>
         <a href="#features">Features</a>
+        <a href="#results">Results</a>
         <a href="courses.html">Courses</a>
         <a href="ask-doubt.html">Ask Doubt</a>
         <a href="admin-login.html">Admin</a>
+        <a href="#faq">FAQ</a>
         <a href="#pricing">Pricing</a>
       </nav>
     </header>
@@ -57,68 +58,6 @@
         </div>
         <div class="hero-note">
           <span data-edit-key="home.heroNote">Built for students who feel coding is tough, but still show up.</span>
-        </div>
-      </section>
-
-      <section id="problems" class="problems section reveal odd-shift">
-        <div class="section-intro">
-          <h2>Real Student Problems</h2>
-          <p>We start with the struggles students actually face every day.</p>
-        </div>
-
-        <div class="problem-list">
-          <article class="problem-card tilt-a">
-            <h3>Resources are scattered</h3>
-            <p>
-              YouTube is separate, notes are separate, and roadmap is separate.
-              Result: more confusion, less coding.
-            </p>
-          </article>
-          <article class="problem-card tilt-b">
-            <h3>Doubts are not solved quickly</h3>
-            <p>
-              When an error appears, a mentor is often unavailable. Learning
-              momentum breaks.
-            </p>
-          </article>
-          <article class="problem-card tilt-c">
-            <h3>Practice is not structured</h3>
-            <p>
-              Solving random questions does not build strong interview prep.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section id="solution" class="solution section reveal">
-        <div class="section-intro">
-          <h2>BrahmaCode Solution</h2>
-          <p>
-            Simple tools and practical flow. No overhype. Only what actually
-            helps.
-          </p>
-        </div>
-        <div class="solution-grid">
-          <article class="feature-box">
-            <h3>Doubt Solving</h3>
-            <p>Fast replies with clear and easy explanations.</p>
-          </article>
-          <article class="feature-box big-gap">
-            <h3>DSA Practice</h3>
-            <p>Topic-wise practice paths so you don't get lost mid-way.</p>
-          </article>
-          <article class="feature-box">
-            <h3>Courses</h3>
-            <p>Beginner to interview level, pace-friendly modules.</p>
-          </article>
-          <article class="feature-box offset-y">
-            <h3>Progress Tracking</h3>
-            <p>See what you finished, where you paused, what to do next.</p>
-          </article>
-          <article class="feature-box warm-card">
-            <h3>Gamification</h3>
-            <p>XP, streak, and badges to make daily consistency fun.</p>
-          </article>
         </div>
       </section>
 
@@ -150,6 +89,67 @@
             <p>Track effort and celebrate small wins, daily.</p>
           </article>
         </div>
+      </section>
+
+      <section id="batches" class="section reveal">
+        <div class="section-intro">
+          <h2>Live + Recorded Batches</h2>
+          <p>Choose a pace that matches your routine and still stay accountable.</p>
+        </div>
+        <div class="batch-grid">
+          <article class="batch-card">
+            <p class="tiny-label">Batch A</p>
+            <h3>JEE Coding Fundamentals</h3>
+            <p>Mon, Wed, Fri • 7:00 PM IST • Daily homework tracker included.</p>
+            <span class="batch-seat">Seats left: 42</span>
+          </article>
+          <article class="batch-card featured-batch">
+            <p class="tiny-label">Most Popular</p>
+            <h3>DSA + Placement Accelerator</h3>
+            <p>Tue, Thu, Sat • 8:30 PM IST • Weekly interview simulation.</p>
+            <span class="batch-seat">Seats left: 17</span>
+          </article>
+          <article class="batch-card">
+            <p class="tiny-label">Weekend</p>
+            <h3>School-to-Code Starter</h3>
+            <p>Sat, Sun • 10:00 AM IST • Beginner-friendly bilingual support.</p>
+            <span class="batch-seat">Seats left: 58</span>
+          </article>
+        </div>
+      </section>
+
+      <section id="results" class="section reveal odd-shift">
+        <div class="section-intro">
+          <h2>Results Snapshot</h2>
+          <p>Consistent learners tend to see faster gains in tests and interviews.</p>
+        </div>
+        <div class="result-strip">
+          <article class="result-pill">
+            <strong>86%</strong>
+            <span>Students improved weekly test scores in 8 weeks</span>
+          </article>
+          <article class="result-pill">
+            <strong>2.4x</strong>
+            <span>Average increase in solved DSA problems per month</span>
+          </article>
+          <article class="result-pill">
+            <strong>1,200+</strong>
+            <span>Doubts resolved with mentor explanations this quarter</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal odd-shift-light">
+        <div class="section-intro">
+          <h2>Rank Predictor (Quick Demo)</h2>
+          <p>Estimate your current bracket from your mock score.</p>
+        </div>
+        <form id="rank-predictor" class="predictor-card">
+          <label for="exam-score">Enter mock score (out of 300)</label>
+          <input id="exam-score" type="number" min="0" max="300" placeholder="e.g. 214" required />
+          <button type="submit" class="btn btn-primary">Predict Rank Range</button>
+          <p id="predictor-note" class="form-note">This is a guidance estimate, not an official rank.</p>
+        </form>
       </section>
 
       <section class="audience section reveal">
@@ -238,6 +238,31 @@
         </div>
 
         <p class="pricing-note">Pricing coming soon</p>
+      </section>
+
+      <section id="faq" class="section reveal">
+        <div class="section-intro">
+          <h2>Frequently Asked Questions</h2>
+          <p>Short answers to the doubts students ask most.</p>
+        </div>
+        <div class="faq-list" id="faq-list">
+          <article class="faq-item">
+            <button class="faq-question" type="button">Do I get class recordings if I miss live sessions?</button>
+            <p class="faq-answer">Yes. Every live class is uploaded within 12 hours with time-stamped notes.</p>
+          </article>
+          <article class="faq-item">
+            <button class="faq-question" type="button">Can school and college students both join the same batch?</button>
+            <p class="faq-answer">For core coding yes, but advanced interview modules are split by level.</p>
+          </article>
+          <article class="faq-item">
+            <button class="faq-question" type="button">How quickly can I expect doubt resolution?</button>
+            <p class="faq-answer">Most active doubts are handled in under 24 hours during support windows.</p>
+          </article>
+          <article class="faq-item">
+            <button class="faq-question" type="button">Is there a low-cost plan for beginners?</button>
+            <p class="faq-answer">Yes. Start with the free track and upgrade only when you need mentor priority.</p>
+          </article>
+        </div>
       </section>
     </main>
 
