@@ -8,7 +8,7 @@ const DEFAULT_ADMIN = { id: 'amankumar0123', password: 'aman1234' };
 const CONTENT_DEFAULTS = {
   'home.heroTitle': 'Learn. Practice. Grow.',
   'home.heroSubtext':
-    'BrahmaCode is a student-first platform where coding is not just theory, it becomes daily progress. Ask doubts, solve DSA problems, and move your learning journey with a clear direction.',
+    "India's AI-powered Coding Practice Platform for Students. BrahmaCode is a student-first platform where coding is not just theory, it becomes daily progress. Ask doubts, solve DSA problems, and move your learning journey with a clear direction.",
   'home.heroNote': 'Built for students who feel coding is tough, but still show up.',
   'courses.heroTitle': 'Courses that feel doable, not overwhelming.',
   'courses.heroSubtext':

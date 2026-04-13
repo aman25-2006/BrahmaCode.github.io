@@ -73,20 +73,20 @@ if (rankPredictor && predictorNote) {
     const scoreInput = document.getElementById('exam-score');
     const score = Number(scoreInput?.value || 0);
 
-    if (Number.isNaN(score) || score < 0 || score > 300) {
-      predictorNote.textContent = 'Please enter a valid score between 0 and 300.';
+    if (Number.isNaN(score) || score < 0 || score > 1000) {
+      predictorNote.textContent = 'Please enter a valid NIMCET score between 0 and 1000.';
       predictorNote.classList.remove('success');
       return;
     }
 
-    let rankRange = '4,00,000 - 8,00,000';
-    if (score >= 250) rankRange = '1 - 5,000';
-    else if (score >= 220) rankRange = '5,000 - 20,000';
-    else if (score >= 180) rankRange = '20,000 - 60,000';
-    else if (score >= 140) rankRange = '60,000 - 1,40,000';
-    else if (score >= 100) rankRange = '1,40,000 - 4,00,000';
+    let rankRange = '12,000+';
+    if (score >= 850) rankRange = '1 - 300';
+    else if (score >= 780) rankRange = '300 - 1,000';
+    else if (score >= 700) rankRange = '1,000 - 3,000';
+    else if (score >= 620) rankRange = '3,000 - 6,000';
+    else if (score >= 520) rankRange = '6,000 - 12,000';
 
-    predictorNote.textContent = `Estimated rank range: ${rankRange} (demo estimator).`;
+    predictorNote.textContent = `Estimated NIMCET rank range: ${rankRange} (demo estimator).`;
     predictorNote.classList.add('success');
   });
 }
