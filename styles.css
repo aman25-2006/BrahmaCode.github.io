@@ -656,6 +656,7 @@ body {
   height: fit-content;
   position: sticky;
   top: 84px;
+  z-index: 10;
 }
 
 .admin-sidebar h2 {
@@ -675,12 +676,20 @@ body {
   color: #2d241d;
   cursor: pointer;
   font: inherit;
+  transition: all 0.18s ease;
+}
+
+.sidebar-link:hover {
+  background: #f0e5d4;
+  border-color: #b8a687;
+  transform: translateY(-1px);
 }
 
 .sidebar-link.is-active {
   background: #2e3c43;
   color: #f8f3eb;
   border-color: #2e3c43;
+  font-weight: 600;
 }
 
 .admin-main {
@@ -716,6 +725,26 @@ body {
   border: 1px solid #d7c4aa;
   border-radius: 12px;
   padding: 16px;
+}
+
+.admin-tab {
+  display: block;
+  animation: fadeIn 0.18s ease;
+}
+
+.admin-tab[hidden] {
+  display: none;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 .admin-block h2 {

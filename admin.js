@@ -225,9 +225,14 @@ function formatDate(input) {
 function initTabs() {
   const buttons = Array.from(document.querySelectorAll('.sidebar-link'));
   const tabs = Array.from(document.querySelectorAll('.admin-tab'));
-  if (!buttons.length || !tabs.length) return;
+  console.log(`initTabs: found ${buttons.length} buttons, ${tabs.length} tabs`);
+  if (!buttons.length || !tabs.length) {
+    console.warn('Tab buttons or sections not found in DOM');
+    return;
+  }
 
   function activate(name) {
+    console.log(`Activating tab: ${name}`);
     tabs.forEach((tab) => {
       tab.hidden = tab.id !== `tab-${name}`;
     });
@@ -238,16 +243,33 @@ function initTabs() {
 
   buttons.forEach((button) => {
     button.addEventListener('click', () => {
-      activate(button.getAttribute('data-tab'));
+      const tabName = button.getAttribute('data-tab');
+      console.log(`Button clicked for tab: ${tabName}`);
+      activate(tabName);
     });
   });
 
   activate('overview');
 }
 
+function ensureBCStore() {
+  if (!window.BCStore) {
+    console.warn('BCStore not available, ensuring initialization...');
+    return false;
+  }
+  return true;
+}
+
 function initOverview() {
   const root = byId('overview-cards');
-  if (!root || !window.BCStore) return;
+  if (!root) {
+    console.warn('Overview cards root not found');
+    return;
+  }
+  if (!ensureBCStore()) {
+    root.innerHTML = '<p class="form-note">Data store initializing. Refresh page if this persists.</p>';
+    return;
+  }
 
   const updates = window.BCStore.getList('updates').length;
   const problems = window.BCStore.getList('problems').length;
@@ -258,12 +280,17 @@ function initOverview() {
     <article class="content-card"><p class="tiny-label">problems</p><h3>${problems}</h3><p>Total coding practice problems</p></article>
     <article class="content-card"><p class="tiny-label">articles</p><h3>${articles}</h3><p>Total published articles</p></article>
   `;
+  console.log(`Overview initialized: ${updates} updates, ${problems} problems, ${articles} articles`);
 }
 
 function initSettingsManager() {
   const form = byId('settings-form');
   const note = byId('settings-note');
-  if (!form || !window.BCStore || !note) return;
+  if (!form || !note) {
+    console.warn('Settings form or note not found');
+    return;
+  }
+  if (!ensureBCStore()) return;
 
   const settings = window.BCStore.getSettings();
   byId('site-title').value = settings.siteTitle || '';
@@ -298,7 +325,11 @@ function bindUpdatesManager() {
   const form = byId('update-form');
   const list = byId('admin-updates-list');
   const note = byId('update-note');
-  if (!form || !list || !window.BCStore || !note) return;
+  if (!form || !list || !note) {
+    console.warn('Updates manager: form, list, or note not found');
+    return;
+  }
+  if (!ensureBCStore()) return;
 
   function render() {
     const updates = window.BCStore.getList('updates');
@@ -364,7 +395,11 @@ function bindProblemsManager() {
   const form = byId('problem-form');
   const list = byId('admin-problems-list');
   const note = byId('problem-note');
-  if (!form || !list || !window.BCStore || !note) return;
+  if (!form || !list || !note) {
+    console.warn('Problems manager: form, list, or note not found');
+    return;
+  }
+  if (!ensureBCStore()) return;
 
   function render() {
     const problems = window.BCStore.getList('problems');
@@ -432,7 +467,11 @@ function bindArticlesManager() {
   const form = byId('article-form');
   const list = byId('admin-articles-list');
   const note = byId('article-note');
-  if (!form || !list || !window.BCStore || !note) return;
+  if (!form || !list || !note) {
+    console.warn('Articles manager: form, list, or note not found');
+    return;
+  }
+  if (!ensureBCStore()) return;
 
   function render() {
     const articles = window.BCStore.getList('articles');
@@ -544,12 +583,17 @@ async function initAdminPanel() {
 
   panelRoot.textContent = `Logged in as: ${user}`;
 
+  if (!ensureBCStore()) {
+    console.error('BCStore failed to initialize after login');
+  }
+
   const logoutBtn = byId('logout-btn');
   logoutBtn?.addEventListener('click', () => {
     clearSessionUser();
     window.location.href = 'admin-login.html';
   });
 
+  console.log('Starting tab initialization...');
   initTabs();
   initOverview();
   initSettingsManager();
