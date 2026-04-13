@@ -28,6 +28,10 @@ const firebaseState = {
   db: null
 };
 
+function byId(id) {
+  return document.getElementById(id);
+}
+
 function hasFirebaseConfig() {
   const config = window.BRAHMACODE_FIREBASE_CONFIG;
   return Boolean(
@@ -170,16 +174,16 @@ function clearSessionUser() {
 }
 
 async function initAdminLogin() {
-  const form = document.getElementById('admin-login-form');
-  const note = document.getElementById('admin-login-note');
+  const form = byId('admin-login-form');
+  const note = byId('admin-login-note');
   if (!form || !note) return;
 
   await readAdmins();
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const adminId = document.getElementById('admin-id').value.trim();
-    const adminPassword = document.getElementById('admin-password').value;
+    const adminId = byId('admin-id').value.trim();
+    const adminPassword = byId('admin-password').value;
     const admins = await readAdmins();
     const match = admins.find((admin) => admin.id === adminId && admin.password === adminPassword);
 
@@ -197,8 +201,8 @@ async function initAdminLogin() {
 }
 
 function initGoogleDummy() {
-  const form = document.getElementById('google-dummy-form');
-  const note = document.getElementById('google-note');
+  const form = byId('google-dummy-form');
+  const note = byId('google-note');
   if (!form || !note) return;
 
   form.addEventListener('submit', (event) => {
@@ -211,8 +215,285 @@ function initGoogleDummy() {
   });
 }
 
+function formatDate(input) {
+  if (!input) return '-';
+  const date = new Date(input);
+  if (Number.isNaN(date.getTime())) return input;
+  return date.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+
+function initTabs() {
+  const buttons = Array.from(document.querySelectorAll('.sidebar-link'));
+  const tabs = Array.from(document.querySelectorAll('.admin-tab'));
+  if (!buttons.length || !tabs.length) return;
+
+  function activate(name) {
+    tabs.forEach((tab) => {
+      tab.hidden = tab.id !== `tab-${name}`;
+    });
+    buttons.forEach((button) => {
+      button.classList.toggle('is-active', button.getAttribute('data-tab') === name);
+    });
+  }
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      activate(button.getAttribute('data-tab'));
+    });
+  });
+
+  activate('overview');
+}
+
+function initOverview() {
+  const root = byId('overview-cards');
+  if (!root || !window.BCStore) return;
+
+  const updates = window.BCStore.getList('updates').length;
+  const problems = window.BCStore.getList('problems').length;
+  const articles = window.BCStore.getList('articles').length;
+
+  root.innerHTML = `
+    <article class="content-card"><p class="tiny-label">updates</p><h3>${updates}</h3><p>Total job/internship/exam updates</p></article>
+    <article class="content-card"><p class="tiny-label">problems</p><h3>${problems}</h3><p>Total coding practice problems</p></article>
+    <article class="content-card"><p class="tiny-label">articles</p><h3>${articles}</h3><p>Total published articles</p></article>
+  `;
+}
+
+function initSettingsManager() {
+  const form = byId('settings-form');
+  const note = byId('settings-note');
+  if (!form || !window.BCStore || !note) return;
+
+  const settings = window.BCStore.getSettings();
+  byId('site-title').value = settings.siteTitle || '';
+  byId('site-description').value = settings.siteDescription || '';
+  byId('show-batches').checked = settings.showBatches !== false;
+  byId('show-results').checked = settings.showResults !== false;
+  byId('show-pricing').checked = settings.showPricing !== false;
+  byId('show-faq').checked = settings.showFaq !== false;
+  byId('show-jobs').checked = settings.showJobsSection !== false;
+  byId('show-practice').checked = settings.showPracticeSection !== false;
+  byId('show-articles').checked = settings.showArticlesSection !== false;
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    window.BCStore.saveSettings({
+      siteTitle: byId('site-title').value.trim(),
+      siteDescription: byId('site-description').value.trim(),
+      showBatches: byId('show-batches').checked,
+      showResults: byId('show-results').checked,
+      showPricing: byId('show-pricing').checked,
+      showFaq: byId('show-faq').checked,
+      showJobsSection: byId('show-jobs').checked,
+      showPracticeSection: byId('show-practice').checked,
+      showArticlesSection: byId('show-articles').checked
+    });
+    note.textContent = 'Settings saved successfully.';
+    note.classList.add('success');
+  });
+}
+
+function bindUpdatesManager() {
+  const form = byId('update-form');
+  const list = byId('admin-updates-list');
+  const note = byId('update-note');
+  if (!form || !list || !window.BCStore || !note) return;
+
+  function render() {
+    const updates = window.BCStore.getList('updates');
+    list.innerHTML = updates.length
+      ? updates
+          .map(
+            (item) => `<div class="admin-row stack-on-mobile">
+          <span><strong>${item.title}</strong><br /><small>${item.category} • ${formatDate(item.date)}</small></span>
+          <div class="row-actions">
+            <button type="button" class="btn btn-muted edit-update" data-id="${item.id}">Edit</button>
+            <button type="button" class="btn btn-muted remove-update" data-id="${item.id}">Delete</button>
+          </div>
+        </div>`
+          )
+          .join('')
+      : '<p class="form-note">No updates created yet.</p>';
+
+    list.querySelectorAll('.edit-update').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = window.BCStore.getById('updates', btn.getAttribute('data-id'));
+        if (!item) return;
+        byId('update-id').value = item.id;
+        byId('update-title').value = item.title;
+        byId('update-category').value = item.category;
+        byId('update-description').value = item.description;
+        byId('update-date').value = item.date;
+        byId('update-link').value = item.link;
+      });
+    });
+
+    list.querySelectorAll('.remove-update').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        window.BCStore.remove('updates', btn.getAttribute('data-id'));
+        render();
+        initOverview();
+      });
+    });
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    window.BCStore.upsert('updates', {
+      id: byId('update-id').value || undefined,
+      title: byId('update-title').value.trim(),
+      category: byId('update-category').value,
+      description: byId('update-description').value.trim(),
+      date: byId('update-date').value,
+      link: byId('update-link').value.trim()
+    });
+
+    form.reset();
+    byId('update-id').value = '';
+    note.textContent = 'Update saved.';
+    note.classList.add('success');
+    render();
+    initOverview();
+  });
+
+  render();
+}
+
+function bindProblemsManager() {
+  const form = byId('problem-form');
+  const list = byId('admin-problems-list');
+  const note = byId('problem-note');
+  if (!form || !list || !window.BCStore || !note) return;
+
+  function render() {
+    const problems = window.BCStore.getList('problems');
+    list.innerHTML = problems.length
+      ? problems
+          .map(
+            (item) => `<div class="admin-row stack-on-mobile">
+          <span><strong>${item.title}</strong><br /><small>${item.difficulty}</small></span>
+          <div class="row-actions">
+            <button type="button" class="btn btn-muted edit-problem" data-id="${item.id}">Edit</button>
+            <button type="button" class="btn btn-muted remove-problem" data-id="${item.id}">Delete</button>
+          </div>
+        </div>`
+          )
+          .join('')
+      : '<p class="form-note">No problems created yet.</p>';
+
+    list.querySelectorAll('.edit-problem').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = window.BCStore.getById('problems', btn.getAttribute('data-id'));
+        if (!item) return;
+        byId('problem-id').value = item.id;
+        byId('problem-title').value = item.title;
+        byId('problem-difficulty').value = item.difficulty;
+        byId('problem-description').value = item.description;
+        byId('problem-constraints').value = item.constraints;
+        byId('problem-examples').value = item.examples;
+        byId('problem-starter').value = item.starterCode || '';
+      });
+    });
+
+    list.querySelectorAll('.remove-problem').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        window.BCStore.remove('problems', btn.getAttribute('data-id'));
+        render();
+        initOverview();
+      });
+    });
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    window.BCStore.upsert('problems', {
+      id: byId('problem-id').value || undefined,
+      title: byId('problem-title').value.trim(),
+      difficulty: byId('problem-difficulty').value,
+      description: byId('problem-description').value.trim(),
+      constraints: byId('problem-constraints').value.trim(),
+      examples: byId('problem-examples').value.trim(),
+      starterCode: byId('problem-starter').value
+    });
+
+    form.reset();
+    byId('problem-id').value = '';
+    note.textContent = 'Problem saved.';
+    note.classList.add('success');
+    render();
+    initOverview();
+  });
+
+  render();
+}
+
+function bindArticlesManager() {
+  const form = byId('article-form');
+  const list = byId('admin-articles-list');
+  const note = byId('article-note');
+  if (!form || !list || !window.BCStore || !note) return;
+
+  function render() {
+    const articles = window.BCStore.getList('articles');
+    list.innerHTML = articles.length
+      ? articles
+          .map(
+            (item) => `<div class="admin-row stack-on-mobile">
+          <span><strong>${item.title}</strong><br /><small>${formatDate(item.date)}</small></span>
+          <div class="row-actions">
+            <button type="button" class="btn btn-muted edit-article" data-id="${item.id}">Edit</button>
+            <button type="button" class="btn btn-muted remove-article" data-id="${item.id}">Delete</button>
+          </div>
+        </div>`
+          )
+          .join('')
+      : '<p class="form-note">No articles created yet.</p>';
+
+    list.querySelectorAll('.edit-article').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = window.BCStore.getById('articles', btn.getAttribute('data-id'));
+        if (!item) return;
+        byId('article-id').value = item.id;
+        byId('article-title').value = item.title;
+        byId('article-excerpt').value = item.excerpt;
+        byId('article-body').value = item.body;
+        byId('article-date').value = item.date;
+      });
+    });
+
+    list.querySelectorAll('.remove-article').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        window.BCStore.remove('articles', btn.getAttribute('data-id'));
+        render();
+        initOverview();
+      });
+    });
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    window.BCStore.upsert('articles', {
+      id: byId('article-id').value || undefined,
+      title: byId('article-title').value.trim(),
+      excerpt: byId('article-excerpt').value.trim(),
+      body: byId('article-body').value.trim(),
+      date: byId('article-date').value
+    });
+
+    form.reset();
+    byId('article-id').value = '';
+    note.textContent = 'Article saved.';
+    note.classList.add('success');
+    render();
+    initOverview();
+  });
+
+  render();
+}
+
 async function renderAdminList() {
-  const container = document.getElementById('admin-list');
+  const container = byId('admin-list');
   if (!container) return;
 
   const currentUser = currentSessionUser();
@@ -252,7 +533,7 @@ async function populateContentForm() {
 }
 
 async function initAdminPanel() {
-  const panelRoot = document.getElementById('session-user');
+  const panelRoot = byId('session-user');
   if (!panelRoot) return;
 
   const user = currentSessionUser();
@@ -263,19 +544,26 @@ async function initAdminPanel() {
 
   panelRoot.textContent = `Logged in as: ${user}`;
 
-  const logoutBtn = document.getElementById('logout-btn');
+  const logoutBtn = byId('logout-btn');
   logoutBtn?.addEventListener('click', () => {
     clearSessionUser();
     window.location.href = 'admin-login.html';
   });
 
-  const addAdminForm = document.getElementById('add-admin-form');
-  const adminNote = document.getElementById('admin-manage-note');
+  initTabs();
+  initOverview();
+  initSettingsManager();
+  bindUpdatesManager();
+  bindProblemsManager();
+  bindArticlesManager();
+
+  const addAdminForm = byId('add-admin-form');
+  const adminNote = byId('admin-manage-note');
 
   addAdminForm?.addEventListener('submit', async (event) => {
     event.preventDefault();
-    const idField = document.getElementById('new-admin-id');
-    const passField = document.getElementById('new-admin-password');
+    const idField = byId('new-admin-id');
+    const passField = byId('new-admin-password');
     const id = idField.value.trim();
     const password = passField.value;
 
@@ -298,9 +586,9 @@ async function initAdminPanel() {
     renderAdminList();
   });
 
-  const contentForm = document.getElementById('content-form');
-  const contentNote = document.getElementById('content-note');
-  const resetBtn = document.getElementById('reset-content-btn');
+  const contentForm = byId('content-form');
+  const contentNote = byId('content-note');
+  const resetBtn = byId('reset-content-btn');
 
   contentForm?.addEventListener('submit', async (event) => {
     event.preventDefault();
@@ -313,7 +601,7 @@ async function initAdminPanel() {
     });
 
     await saveContentOverrides(overrides);
-    contentNote.textContent = 'Content saved. Refresh the website pages to view changes.';
+    contentNote.textContent = 'Content saved. Refresh website pages to view changes.';
     contentNote.classList.add('success');
   });
 

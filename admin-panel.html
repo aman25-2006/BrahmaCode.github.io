@@ -14,42 +14,144 @@
     <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
-    <main class="page-wrap section">
-      <section class="admin-top reveal">
-        <div>
-          <h1>Admin Panel</h1>
-          <p id="session-user" class="admin-sub">Logged in as: -</p>
-        </div>
-        <div class="admin-top-actions">
-          <a href="index.html" class="btn btn-muted">Open Website</a>
-          <button id="logout-btn" class="btn btn-primary" type="button">Logout</button>
-        </div>
-      </section>
+    <main class="page-wrap section admin-layout">
+      <aside class="admin-sidebar reveal">
+        <h2>Dashboard</h2>
+        <button class="sidebar-link" type="button" data-tab="overview">Overview</button>
+        <button class="sidebar-link" type="button" data-tab="settings">Website Settings</button>
+        <button class="sidebar-link" type="button" data-tab="updates">Jobs &amp; Exams</button>
+        <button class="sidebar-link" type="button" data-tab="problems">Coding Problems</button>
+        <button class="sidebar-link" type="button" data-tab="articles">Articles</button>
+        <button class="sidebar-link" type="button" data-tab="content">Hero Content</button>
+        <button class="sidebar-link" type="button" data-tab="admins">Admins</button>
+      </aside>
 
-      <section class="admin-grid section reveal">
-        <article class="admin-block">
-          <h2>Manage Admins</h2>
-          <p class="admin-sub">Create another admin who can log in and edit content.</p>
+      <section class="admin-main reveal">
+        <section class="admin-top">
+          <div>
+            <h1>Admin Panel</h1>
+            <p id="session-user" class="admin-sub">Logged in as: -</p>
+          </div>
+          <div class="admin-top-actions">
+            <a href="index.html" class="btn btn-muted">Open Website</a>
+            <button id="logout-btn" class="btn btn-primary" type="button">Logout</button>
+          </div>
+        </section>
 
-          <form id="add-admin-form" class="admin-form compact">
-            <label for="new-admin-id">New admin ID</label>
-            <input id="new-admin-id" type="text" required />
+        <section id="tab-overview" class="admin-tab admin-block">
+          <h2>Overview</h2>
+          <p class="admin-sub">Quick snapshot of portal data.</p>
+          <div id="overview-cards" class="content-grid"></div>
+        </section>
 
-            <label for="new-admin-password">New admin password</label>
-            <input id="new-admin-password" type="password" required />
+        <section id="tab-settings" class="admin-tab admin-block" hidden>
+          <h2>Website Settings</h2>
+          <form id="settings-form" class="admin-form compact">
+            <label for="site-title">Site Title</label>
+            <input id="site-title" type="text" required />
 
-            <button type="submit" class="btn btn-primary">Add Admin</button>
-            <p id="admin-manage-note" class="form-note"></p>
+            <label for="site-description">Meta Description</label>
+            <textarea id="site-description" rows="3"></textarea>
+
+            <label class="check-row"><input id="show-batches" type="checkbox" /> Show Batches section</label>
+            <label class="check-row"><input id="show-results" type="checkbox" /> Show Results section</label>
+            <label class="check-row"><input id="show-pricing" type="checkbox" /> Show Pricing section</label>
+            <label class="check-row"><input id="show-faq" type="checkbox" /> Show FAQ section</label>
+            <label class="check-row"><input id="show-jobs" type="checkbox" /> Show Jobs section</label>
+            <label class="check-row"><input id="show-practice" type="checkbox" /> Show Practice section</label>
+            <label class="check-row"><input id="show-articles" type="checkbox" /> Show Articles section</label>
+
+            <button class="btn btn-primary" type="submit">Save Settings</button>
+            <p id="settings-note" class="form-note"></p>
           </form>
+        </section>
 
-          <div id="admin-list" class="admin-list"></div>
-        </article>
+        <section id="tab-updates" class="admin-tab admin-block" hidden>
+          <h2>Manage Jobs &amp; Exams</h2>
+          <form id="update-form" class="admin-form compact">
+            <input id="update-id" type="hidden" />
+            <label for="update-title">Title</label>
+            <input id="update-title" type="text" required />
 
-        <article class="admin-block">
+            <label for="update-category">Category</label>
+            <select id="update-category" required>
+              <option value="jobs">Jobs</option>
+              <option value="internships">Internships</option>
+              <option value="exams">Exams</option>
+            </select>
+
+            <label for="update-description">Description</label>
+            <textarea id="update-description" rows="3" required></textarea>
+
+            <label for="update-date">Date</label>
+            <input id="update-date" type="date" required />
+
+            <label for="update-link">Apply Link</label>
+            <input id="update-link" type="url" required />
+
+            <button class="btn btn-primary" type="submit">Save Update</button>
+            <p id="update-note" class="form-note"></p>
+          </form>
+          <div id="admin-updates-list" class="admin-list"></div>
+        </section>
+
+        <section id="tab-problems" class="admin-tab admin-block" hidden>
+          <h2>Manage Coding Problems</h2>
+          <form id="problem-form" class="admin-form compact">
+            <input id="problem-id" type="hidden" />
+            <label for="problem-title">Title</label>
+            <input id="problem-title" type="text" required />
+
+            <label for="problem-difficulty">Difficulty</label>
+            <select id="problem-difficulty" required>
+              <option value="easy">Easy</option>
+              <option value="medium">Medium</option>
+              <option value="hard">Hard</option>
+            </select>
+
+            <label for="problem-description">Description</label>
+            <textarea id="problem-description" rows="4" required></textarea>
+
+            <label for="problem-constraints">Constraints</label>
+            <textarea id="problem-constraints" rows="2" required></textarea>
+
+            <label for="problem-examples">Examples</label>
+            <textarea id="problem-examples" rows="3" required></textarea>
+
+            <label for="problem-starter">Starter Code</label>
+            <textarea id="problem-starter" rows="5"></textarea>
+
+            <button class="btn btn-primary" type="submit">Save Problem</button>
+            <p id="problem-note" class="form-note"></p>
+          </form>
+          <div id="admin-problems-list" class="admin-list"></div>
+        </section>
+
+        <section id="tab-articles" class="admin-tab admin-block" hidden>
+          <h2>Manage Articles</h2>
+          <form id="article-form" class="admin-form compact">
+            <input id="article-id" type="hidden" />
+            <label for="article-title">Title</label>
+            <input id="article-title" type="text" required />
+
+            <label for="article-excerpt">Excerpt</label>
+            <textarea id="article-excerpt" rows="2" required></textarea>
+
+            <label for="article-body">Body</label>
+            <textarea id="article-body" rows="5" required></textarea>
+
+            <label for="article-date">Date</label>
+            <input id="article-date" type="date" required />
+
+            <button class="btn btn-primary" type="submit">Save Article</button>
+            <p id="article-note" class="form-note"></p>
+          </form>
+          <div id="admin-articles-list" class="admin-list"></div>
+        </section>
+
+        <section id="tab-content" class="admin-tab admin-block" hidden>
           <h2>Website Text Editor</h2>
-          <p class="admin-sub">
-            Update key homepage/course texts. Changes apply on refresh for this browser.
-          </p>
+          <p class="admin-sub">Update key homepage/course texts. Changes apply on refresh.</p>
 
           <form id="content-form" class="admin-form compact">
             <label for="home-title">Home Hero Title</label>
@@ -74,11 +176,30 @@
             <button type="button" id="reset-content-btn" class="btn btn-muted">Reset to Default</button>
             <p id="content-note" class="form-note"></p>
           </form>
-        </article>
+        </section>
+
+        <section id="tab-admins" class="admin-tab admin-block" hidden>
+          <h2>Manage Admins</h2>
+          <p class="admin-sub">Create another admin who can log in and edit content.</p>
+
+          <form id="add-admin-form" class="admin-form compact">
+            <label for="new-admin-id">New admin ID</label>
+            <input id="new-admin-id" type="text" required />
+
+            <label for="new-admin-password">New admin password</label>
+            <input id="new-admin-password" type="password" required />
+
+            <button type="submit" class="btn btn-primary">Add Admin</button>
+            <p id="admin-manage-note" class="form-note"></p>
+          </form>
+
+          <div id="admin-list" class="admin-list"></div>
+        </section>
       </section>
     </main>
 
     <script src="script.js"></script>
+    <script src="data-store.js"></script>
     <script src="firebase-config.js"></script>
     <script src="admin.js"></script>
   </body>

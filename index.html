@@ -32,14 +32,11 @@
         Menu
       </button>
       <nav id="main-nav">
-        <a href="#batches">Batches</a>
-        <a href="#features">Features</a>
-        <a href="#results">Results</a>
-        <a href="courses.html">Courses</a>
-        <a href="ask-doubt.html">Ask Doubt</a>
+        <a href="index.html">Home</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="practice.html">Practice</a>
+        <a href="articles.html">Articles</a>
         <a href="admin-login.html">Admin</a>
-        <a href="#faq">FAQ</a>
-        <a href="#pricing">Pricing</a>
       </nav>
     </header>
 
@@ -92,7 +89,7 @@
         </div>
       </section>
 
-      <section id="batches" class="section reveal">
+      <section id="batches" class="section reveal" data-section-key="showBatches">
         <div class="section-intro">
           <h2>Competitive Tech Exam Batches</h2>
           <p>Structured preparation for NIMCET, GATE, IIT JAM, and other tech-focused competitive exams.</p>
@@ -119,7 +116,7 @@
         </div>
       </section>
 
-      <section id="results" class="section reveal odd-shift">
+      <section id="results" class="section reveal odd-shift" data-section-key="showResults">
         <div class="section-intro">
           <h2>Results Snapshot</h2>
           <p>Consistent learners tend to see faster gains in tests and interviews.</p>
@@ -138,6 +135,30 @@
             <span>Doubts resolved with mentor explanations this quarter</span>
           </article>
         </div>
+      </section>
+
+      <section id="jobs-preview" class="section reveal odd-shift-light" data-section-key="showJobsSection">
+        <div class="section-intro">
+          <h2>Jobs &amp; Exam Updates</h2>
+          <p>Fresh internships, hiring notifications, and latest exam alerts in one place.</p>
+        </div>
+        <div id="home-updates-list" class="content-grid"></div>
+      </section>
+
+      <section id="practice-preview" class="section reveal" data-section-key="showPracticeSection">
+        <div class="section-intro">
+          <h2>Coding Practice</h2>
+          <p>Practice problems with clear statements and difficulty levels.</p>
+        </div>
+        <div id="home-problems-list" class="content-grid"></div>
+      </section>
+
+      <section id="articles-preview" class="section reveal odd-shift" data-section-key="showArticlesSection">
+        <div class="section-intro">
+          <h2>Latest Articles</h2>
+          <p>Practical tips on coding, interviews, exams, and growth.</p>
+        </div>
+        <div id="home-articles-list" class="content-grid"></div>
       </section>
 
       <section class="section reveal odd-shift-light">
@@ -214,7 +235,7 @@
         </div>
       </section>
 
-      <section id="pricing" class="pricing section reveal">
+      <section id="pricing" class="pricing section reveal" data-section-key="showPricing">
         <div class="section-intro">
           <h2>Pricing</h2>
           <p>We keep it affordable. Student budget comes first.</p>
@@ -241,7 +262,7 @@
         <p class="pricing-note">Pricing coming soon</p>
       </section>
 
-      <section id="faq" class="section reveal">
+      <section id="faq" class="section reveal" data-section-key="showFaq">
         <div class="section-intro">
           <h2>Frequently Asked Questions</h2>
           <p>Short answers to the doubts students ask most.</p>
@@ -279,6 +300,8 @@
     </footer>
 
     <script src="script.js"></script>
+    <script src="data-store.js"></script>
+    <script src="portal.js"></script>
     <script src="firebase-config.js"></script>
     <script src="admin.js"></script>
   </body>
