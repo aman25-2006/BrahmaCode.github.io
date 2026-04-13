@@ -944,6 +944,38 @@ body {
   padding: 16px;
 }
 
+.doubt-panel .section-intro h2 {
+  color: #0d1630;
+  background: none;
+  -webkit-background-clip: border-box;
+  background-clip: border-box;
+  -webkit-text-fill-color: initial;
+}
+
+.doubt-panel .section-intro p {
+  color: #44506a;
+}
+
+.doubt-panel .tiny-label,
+.doubt-panel .doubt-head h3,
+.doubt-panel .compact-item h4 {
+  color: #0f1a34;
+}
+
+.doubt-panel .doubt-desc,
+.doubt-panel .compact-item p,
+.doubt-panel .compact-meta,
+.doubt-panel .doubt-meta-row,
+.doubt-panel .form-note {
+  color: #4f5b73;
+}
+
+.doubt-panel .chip {
+  border-color: rgba(63, 84, 120, 0.35);
+  color: #22304d;
+  background: rgba(223, 231, 245, 0.9);
+}
+
 .doubt-toolbar {
   align-items: end;
   flex-wrap: wrap;
