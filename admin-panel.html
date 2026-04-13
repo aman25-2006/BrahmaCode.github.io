@@ -22,6 +22,7 @@
         <button class="sidebar-link" type="button" data-tab="updates">Jobs &amp; Exams</button>
         <button class="sidebar-link" type="button" data-tab="problems">Coding Problems</button>
         <button class="sidebar-link" type="button" data-tab="articles">Articles</button>
+        <button class="sidebar-link" type="button" data-tab="moderation">Doubt Moderation</button>
         <button class="sidebar-link" type="button" data-tab="content">Hero Content</button>
         <button class="sidebar-link" type="button" data-tab="admins">Admins</button>
       </aside>
@@ -149,6 +150,28 @@
           <div id="admin-articles-list" class="admin-list"></div>
         </section>
 
+        <section id="tab-moderation" class="admin-tab admin-block" hidden>
+          <h2>Doubt Moderation</h2>
+          <p class="admin-sub">Delete inappropriate doubts/answers and manage tag list.</p>
+
+          <form id="moderation-tags-form" class="admin-form compact">
+            <label for="moderation-tag-input">Add Tag</label>
+            <input id="moderation-tag-input" type="text" placeholder="Example: SystemDesign" required />
+            <button type="submit" class="btn btn-primary">Add Tag</button>
+            <p id="moderation-note" class="form-note"></p>
+          </form>
+
+          <div class="admin-list">
+            <h3>Available Tags</h3>
+            <div id="moderation-tags-list"></div>
+          </div>
+
+          <div class="admin-list">
+            <h3>Recent Doubts</h3>
+            <div id="moderation-doubts-list"></div>
+          </div>
+        </section>
+
         <section id="tab-content" class="admin-tab admin-block" hidden>
           <h2>Website Text Editor</h2>
           <p class="admin-sub">Update key homepage/course texts. Changes apply on refresh.</p>
@@ -202,5 +225,6 @@
     <script src="data-store.js"></script>
     <script src="firebase-config.js"></script>
     <script src="admin.js"></script>
+    <script src="doubt-system.js"></script>
   </body>
 </html>

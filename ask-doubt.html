@@ -35,81 +35,106 @@
         <a href="index.html">Home</a>
         <a href="jobs.html">Jobs</a>
         <a href="practice.html">Practice</a>
-        <a href="articles.html">Articles</a>
+        <a href="ask-doubt.html">Doubts</a>
         <a href="admin-login.html">Admin</a>
       </nav>
     </header>
 
     <main class="page-wrap">
       <section class="hero section reveal">
-        <p class="tiny-label">mentor support • no judgement zone</p>
-        <h1 data-edit-key="doubt.heroTitle">Stuck? Send your doubt and we will solve it together.</h1>
+        <p class="tiny-label">community support • ask, answer, upvote</p>
+        <h1 data-edit-key="doubt.heroTitle">Community Doubts for Real Coding Problems.</h1>
         <p class="hero-subtext">
-          If your code is not running, your logic is not clicking, or your
-          roadmap is unclear, just ask. Our team explains in a practical way,
-          without unnecessary complexity.
+          Post your issue, add tags, and get help from peers or mentors. This feed is persistent,
+          filterable, and designed for day-to-day student coding discussions.
         </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#ask-doubt-form">Ask Doubt</a>
+          <a class="btn btn-muted" href="#recent-doubts">Explore Feed</a>
+        </div>
       </section>
 
-      <section class="section reveal odd-shift">
-        <div class="section-intro">
-          <h2>Doubt Form</h2>
-          <p>The more context you provide, the faster and better we can help.</p>
+      <section class="section reveal">
+        <div class="doubt-layout">
+          <article id="ask-doubt-form" class="doubt-panel">
+            <div class="section-intro">
+              <h2>Ask Doubt Form</h2>
+              <p>Clear title + context helps the community answer faster.</p>
+            </div>
+
+            <form class="doubt-form" id="community-doubt-form">
+              <label for="doubt-title">Title</label>
+              <input id="doubt-title" type="text" maxlength="120" placeholder="Example: Why is my binary search failing on edge cases?" required />
+
+              <label for="doubt-description">Description</label>
+              <textarea id="doubt-description" rows="6" placeholder="Explain what you tried, expected output, and actual output." required></textarea>
+
+              <label for="doubt-tags">Tags</label>
+              <input id="doubt-tags" type="text" placeholder="#DSA, #Python, #WebDev" required />
+
+              <label for="doubt-code">Code (optional)</label>
+              <textarea id="doubt-code" rows="6" placeholder="Paste your code snippet here (optional)"></textarea>
+
+              <button type="submit" class="btn btn-primary">Post Doubt</button>
+              <p class="form-note" id="community-form-note">Your doubt will appear in the recent feed after posting.</p>
+            </form>
+          </article>
+
+          <article class="doubt-panel" id="recent-doubts">
+            <div class="section-intro">
+              <h2>Recent Doubts Feed</h2>
+              <p>Browse latest, popular, unanswered, or tag-filtered doubts.</p>
+            </div>
+
+            <div class="toolbar-row doubt-toolbar">
+              <label for="doubt-sort">Sort</label>
+              <select id="doubt-sort">
+                <option value="latest">Latest</option>
+                <option value="popular">Most Upvoted</option>
+                <option value="unanswered">Unanswered</option>
+              </select>
+
+              <label for="doubt-tag-filter">Tag</label>
+              <select id="doubt-tag-filter">
+                <option value="all">All Tags</option>
+              </select>
+            </div>
+
+            <div id="tag-chip-filter" class="tag-chip-filter"></div>
+            <div id="recent-doubts-feed" class="doubt-feed"></div>
+          </article>
+
+          <article class="doubt-panel">
+            <div class="section-intro">
+              <h2>Popular Questions</h2>
+              <p>Quick access to top-voted doubts.</p>
+            </div>
+            <div id="popular-doubts-list" class="compact-list"></div>
+          </article>
         </div>
-
-        <!-- Realistic simple form, no fake backend promise -->
-        <form class="doubt-form" id="doubt-form">
-          <label for="student-name">Your name</label>
-          <input id="student-name" name="student-name" type="text" placeholder="Aman / Priya / your name" required />
-
-          <label for="student-level">Current level</label>
-          <select id="student-level" name="student-level" required>
-            <option value="">Select one</option>
-            <option>School learner</option>
-            <option>College beginner</option>
-            <option>Intermediate (DSA/Web)</option>
-          </select>
-
-          <label for="doubt-topic">Topic</label>
-          <input id="doubt-topic" name="doubt-topic" type="text" placeholder="Binary Search / JavaScript / Recursion" required />
-
-          <label for="doubt-desc">What exactly is stuck?</label>
-          <textarea id="doubt-desc" name="doubt-desc" rows="6" placeholder="Example: I did a dry run but I am not able to handle an edge case..." required></textarea>
-
-          <label for="code-link">Code link (optional)</label>
-          <input id="code-link" name="code-link" type="url" placeholder="GitHub / Replit / Pastebin" />
-
-          <button type="submit" class="btn btn-primary">Send Doubt</button>
-          <p class="form-note" id="form-note">We usually reply within 24 hours on active days.</p>
-        </form>
       </section>
 
       <section class="section reveal odd-shift-light">
         <div class="section-intro">
-          <h2>Quick Contact Options</h2>
-          <p>If your issue is urgent, you can reach out directly.</p>
+          <h2>Future Ready Ideas</h2>
+          <p>Planned add-ons for smarter and faster doubt resolution.</p>
         </div>
-
         <div class="feature-cards">
-          <article class="fcard misaligned-1">
-            <div class="icon">📱</div>
-            <h3>WhatsApp Help</h3>
-            <p>Quick support for batch doubts and assignment confusion.</p>
+          <article class="fcard">
+            <h3>Notifications</h3>
+            <p>Notify users when their doubt gets an answer or upvote.</p>
           </article>
-          <article class="fcard misaligned-2">
-            <div class="icon">🎧</div>
-            <h3>Voice Doubt Slot</h3>
-            <p>Clear difficult logic concepts in a 10-minute guided call.</p>
+          <article class="fcard">
+            <h3>AI Suggestion Layer</h3>
+            <p>Suggest likely solutions and related discussions before posting.</p>
           </article>
-          <article class="fcard misaligned-3">
-            <div class="icon">🧩</div>
-            <h3>Debug Together</h3>
-            <p>Screen share style walkthrough on selected student requests.</p>
+          <article class="fcard">
+            <h3>Duplicate Detection</h3>
+            <p>Warn if a very similar doubt already exists in the community feed.</p>
           </article>
-          <article class="fcard misaligned-4">
-            <div class="icon">🕒</div>
-            <h3>Response Window</h3>
-            <p>Usually 4pm-10pm IST, with extended slots during exam season.</p>
+          <article class="fcard">
+            <h3>Mentor Priority Queue</h3>
+            <p>Escalate unanswered doubts older than 24 hours to mentors.</p>
           </article>
         </div>
       </section>
@@ -130,6 +155,7 @@
     <script src="data-store.js"></script>
     <script src="portal.js"></script>
     <script src="firebase-config.js"></script>
+    <script src="doubt-system.js"></script>
     <script src="admin.js"></script>
   </body>
 </html>
