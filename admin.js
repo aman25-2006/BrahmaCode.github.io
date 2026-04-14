@@ -3,8 +3,7 @@ const ADMIN_STORE_KEY = 'bc_admin_accounts';
 const ADMIN_SESSION_KEY = 'bc_admin_session';
 const CONTENT_STORE_KEY = 'bc_content_overrides';
 const FIREBASE_SDK_VERSION = '10.12.5';
-
-const DEFAULT_ADMIN = { id: 'amankumar0123', password: 'aman1234' };
+const MIN_ADMIN_PASSWORD_LENGTH = 8;
 const CONTENT_DEFAULTS = {
   'home.heroTitle': 'Learn. Practice. Grow.',
   'home.heroSubtext':
@@ -79,13 +78,13 @@ async function ensureFirebase() {
 
 function localAdmins() {
   const raw = localStorage.getItem(ADMIN_STORE_KEY);
-  if (!raw) return [DEFAULT_ADMIN];
+  if (!raw) return [];
 
   try {
     const parsed = JSON.parse(raw);
-    return Array.isArray(parsed) && parsed.length ? parsed : [DEFAULT_ADMIN];
+    return Array.isArray(parsed) ? parsed : [];
   } catch {
-    return [DEFAULT_ADMIN];
+    return [];
   }
 }
 
@@ -178,13 +177,38 @@ async function initAdminLogin() {
   const note = byId('admin-login-note');
   if (!form || !note) return;
 
-  await readAdmins();
+  const existingAdmins = await readAdmins();
+  if (!existingAdmins.length) {
+    note.textContent = 'No admin account found. Your first login will create one securely.';
+  }
 
   form.addEventListener('submit', async (event) => {
     event.preventDefault();
     const adminId = byId('admin-id').value.trim();
     const adminPassword = byId('admin-password').value;
     const admins = await readAdmins();
+
+    if (!adminId || !adminPassword) {
+      note.textContent = 'Admin ID and password are required.';
+      note.classList.remove('success');
+      return;
+    }
+
+    if (!admins.length) {
+      if (adminPassword.length < MIN_ADMIN_PASSWORD_LENGTH) {
+        note.textContent = `Use at least ${MIN_ADMIN_PASSWORD_LENGTH} characters for password.`;
+        note.classList.remove('success');
+        return;
+      }
+
+      await saveAdmins([{ id: adminId, password: adminPassword }]);
+      setSessionUser(adminId);
+      note.textContent = 'Admin account created. Redirecting to panel...';
+      note.classList.add('success');
+      window.location.href = 'admin-panel.html';
+      return;
+    }
+
     const match = admins.find((admin) => admin.id === adminId && admin.password === adminPassword);
 
     if (!match) {
@@ -646,7 +670,7 @@ async function renderAdminList() {
 
   container.innerHTML = admins
     .map((admin) => {
-      const canRemove = admin.id !== DEFAULT_ADMIN.id && admin.id !== currentUser;
+      const canRemove = admin.id !== currentUser && admins.length > 1;
       return `<div class="admin-row">
         <span><strong>${admin.id}</strong>${admin.id === currentUser ? ' (you)' : ''}</span>
         ${canRemove ? `<button class="btn btn-muted remove-admin-btn" data-admin-id="${admin.id}" type="button">Remove</button>` : '<span class="chip">Protected</span>'}
@@ -715,6 +739,11 @@ async function initAdminPanel() {
 
     if (!id || !password) {
       adminNote.textContent = 'Admin ID and password are required.';
+      return;
+    }
+
+    if (password.length < MIN_ADMIN_PASSWORD_LENGTH) {
+      adminNote.textContent = `Password must be at least ${MIN_ADMIN_PASSWORD_LENGTH} characters.`;
       return;
     }
 
