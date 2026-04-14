@@ -22,6 +22,7 @@
         <button class="sidebar-link" type="button" data-tab="updates">Jobs &amp; Exams</button>
         <button class="sidebar-link" type="button" data-tab="problems">Coding Problems</button>
         <button class="sidebar-link" type="button" data-tab="articles">Articles</button>
+        <button class="sidebar-link" type="button" data-tab="courses">Courses</button>
         <button class="sidebar-link" type="button" data-tab="moderation">Doubt Moderation</button>
         <button class="sidebar-link" type="button" data-tab="content">Hero Content</button>
         <button class="sidebar-link" type="button" data-tab="admins">Admins</button>
@@ -148,6 +149,60 @@
             <p id="article-note" class="form-note"></p>
           </form>
           <div id="admin-articles-list" class="admin-list"></div>
+        </section>
+
+        <section id="tab-courses" class="admin-tab admin-block" hidden>
+          <h2>Manage Courses</h2>
+          <p class="admin-sub">Add, edit, or remove courses from the live platform without changing code.</p>
+          <form id="course-form" class="admin-form compact">
+            <input id="course-id" type="hidden" />
+
+            <label for="course-title">Title</label>
+            <input id="course-title" type="text" required />
+
+            <label for="course-level">Level</label>
+            <select id="course-level" required>
+              <option value="Beginner">Beginner</option>
+              <option value="Intermediate">Intermediate</option>
+              <option value="Advanced">Advanced</option>
+            </select>
+
+            <label for="course-duration">Duration</label>
+            <input id="course-duration" type="text" placeholder="Example: 6 weeks" required />
+
+            <label for="course-category">Learning Path</label>
+            <select id="course-category" required>
+              <option value="Web Development">Web Development</option>
+              <option value="Data Structures & Algorithms">Data Structures &amp; Algorithms</option>
+              <option value="Python / AI">Python / AI</option>
+            </select>
+
+            <label for="course-description">Short Description</label>
+            <textarea id="course-description" rows="3" required></textarea>
+
+            <label for="course-overview">Course Overview</label>
+            <textarea id="course-overview" rows="4" required></textarea>
+
+            <label for="course-modules">Modules / Chapters</label>
+            <textarea id="course-modules" rows="5" placeholder="One module per line" required></textarea>
+
+            <label for="course-lessons">Example Lessons</label>
+            <textarea id="course-lessons" rows="4" placeholder="One lesson per line" required></textarea>
+
+            <label for="course-video-url">Video Placeholder Link</label>
+            <input id="course-video-url" type="url" placeholder="Optional video link" />
+
+            <label for="course-progress">Default Progress</label>
+            <input id="course-progress" type="number" min="0" max="100" step="1" value="0" />
+
+            <label class="check-row"><input id="course-featured" type="checkbox" /> Featured course</label>
+            <label class="check-row"><input id="course-popular" type="checkbox" /> Popular course</label>
+            <label class="check-row"><input id="course-certificate" type="checkbox" checked /> Certificate enabled</label>
+
+            <button class="btn btn-primary" type="submit">Save Course</button>
+            <p id="course-note" class="form-note"></p>
+          </form>
+          <div id="admin-courses-list" class="admin-list"></div>
         </section>
 
         <section id="tab-moderation" class="admin-tab admin-block" hidden>

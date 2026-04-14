@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrahmaCode Course Detail</title>
+    <meta
+      name="description"
+      content="Course detail page for BrahmaCode with modules, lessons, progress, and a learning preview."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;600;700&family=Sora:wght@500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="top-nav">
+      <a class="brand" href="index.html">
+        <img src="assets/brahmacode-logo.svg" alt="BrahmaCode logo" class="brand-logo" />
+        <span class="brand-text">Brahma<span>Code</span></span>
+      </a>
+      <button
+        class="menu-toggle"
+        id="menu-toggle"
+        aria-label="Open menu"
+        aria-expanded="false"
+        aria-controls="main-nav"
+      >
+        Menu
+      </button>
+      <nav id="main-nav">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="practice.html">Practice</a>
+        <a href="articles.html">Articles</a>
+        <a href="admin-login.html">Admin</a>
+      </nav>
+    </header>
+
+    <main class="page-wrap">
+      <section id="course-detail-root" class="course-detail-shell reveal">
+        <p class="form-note">Loading course details...</p>
+      </section>
+    </main>
+
+    <footer class="footer section page-wrap">
+      <p class="founder">Founder: Aman Kumar</p>
+      <div class="socials">
+        <a href="https://www.linkedin.com/company/brahmacode" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://www.instagram.com/brahmacode" aria-label="Instagram" target="_blank" rel="noopener noreferrer">Instagram</a>
+        <a href="https://x.com/brahmacode" aria-label="X" target="_blank" rel="noopener noreferrer">X</a>
+        <a href="https://www.facebook.com/brahmacode" aria-label="Facebook" target="_blank" rel="noopener noreferrer">Facebook</a>
+      </div>
+      <p class="copy">BrahmaCode © 2026 • Learn with support, grow with consistency.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="data-store.js"></script>
+    <script src="portal.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

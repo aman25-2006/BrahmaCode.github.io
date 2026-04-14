@@ -14,6 +14,142 @@
       showPracticeSection: true,
       showArticlesSection: true
     },
+    courses: [
+      {
+        id: 'course-web-launchpad',
+        title: 'Web Development Launchpad',
+        level: 'Beginner',
+        duration: '6 weeks',
+        category: 'Web Development',
+        description: 'Build clean landing pages, dashboards, and portfolio-ready UI with modern HTML, CSS, and JavaScript.',
+        overview:
+          'A beginner-friendly path that turns static pages into polished web products. You will learn layout systems, component thinking, responsive design, API-driven features, and deployment basics.',
+        modules: [
+          'Module 1 - HTML, semantic structure, and page architecture',
+          'Module 2 - Modern CSS, grids, motion, and responsive systems',
+          'Module 3 - JavaScript essentials and interactive UI patterns',
+          'Module 4 - APIs, forms, and project wiring',
+          'Module 5 - Portfolio launch, review, and publishing'
+        ],
+        lessons: [
+          'Landing page anatomy: hero, social proof, and CTA flow',
+          'Responsive card grids with modern spacing and typography',
+          'Live project: launch a student dashboard with filters'
+        ],
+        featured: true,
+        popular: true,
+        videoUrl: '',
+        certificateEnabled: true,
+        defaultProgress: 38
+      },
+      {
+        id: 'course-dsa-sprint',
+        title: 'DSA Sprint',
+        level: 'Intermediate',
+        duration: '8 weeks',
+        category: 'Data Structures & Algorithms',
+        description: 'Strengthen problem solving with arrays, hashing, recursion, trees, graphs, and interview patterns.',
+        overview:
+          'This track builds problem-solving fluency through pattern recognition, live practice, timed drills, and mentor review. Each chapter is designed to fit a student schedule.',
+        modules: [
+          'Module 1 - Arrays, strings, and complexity thinking',
+          'Module 2 - Hash maps, stacks, queues, and linked lists',
+          'Module 3 - Recursion, backtracking, and binary search',
+          'Module 4 - Trees, heaps, and graph fundamentals',
+          'Module 5 - Timed contests, review, and interview patterns'
+        ],
+        lessons: [
+          'Pattern drill: sliding window and two pointers',
+          'Stack-based parsing for interview-style questions',
+          'Timed practice set with mentor feedback'
+        ],
+        featured: true,
+        popular: true,
+        videoUrl: '',
+        certificateEnabled: true,
+        defaultProgress: 64
+      },
+      {
+        id: 'course-python-ai',
+        title: 'Python / AI Starter Lab',
+        level: 'Beginner',
+        duration: '7 weeks',
+        category: 'Python / AI',
+        description: 'Learn Python foundations, automation workflows, and practical AI concepts without heavy math overload.',
+        overview:
+          'A hands-on path for students who want to move from syntax to simple AI-powered projects. You will work through Python basics, notebooks, data handling, and lightweight AI demos.',
+        modules: [
+          'Module 1 - Python syntax, data types, and control flow',
+          'Module 2 - Functions, files, and reusable helpers',
+          'Module 3 - Data handling with lists, dictionaries, and pandas basics',
+          'Module 4 - AI workflow introduction and prompt-driven tasks',
+          'Module 5 - Mini project: smart study helper'
+        ],
+        lessons: [
+          'Write your first Python automation script',
+          'Turn a notebook into a reusable practice helper',
+          'Build a simple AI note summarizer demo'
+        ],
+        featured: true,
+        popular: false,
+        videoUrl: '',
+        certificateEnabled: true,
+        defaultProgress: 22
+      },
+      {
+        id: 'course-front-end-fusion',
+        title: 'Frontend Fusion',
+        level: 'Intermediate',
+        duration: '5 weeks',
+        category: 'Web Development',
+        description: 'Move beyond basics with component systems, state patterns, and production-ready UI polish.',
+        overview:
+          'A compact upgrade track for learners who already know the basics and want to design better interfaces, work with state, and build faster.',
+        modules: [
+          'Module 1 - UI composition and design tokens',
+          'Module 2 - State, events, and data flow',
+          'Module 3 - Reusable components and live search',
+          'Module 4 - Product polish, accessibility, and testing',
+          'Module 5 - Deploy a premium student portal'
+        ],
+        lessons: [
+          'Compose a dashboard with reusable cards',
+          'Add live filters and loading states',
+          'Ship a polished mini app with review notes'
+        ],
+        featured: false,
+        popular: true,
+        videoUrl: '',
+        certificateEnabled: true,
+        defaultProgress: 48
+      },
+      {
+        id: 'course-placement-edge',
+        title: 'Placement Edge',
+        level: 'Advanced',
+        duration: '4 weeks',
+        category: 'Data Structures & Algorithms',
+        description: 'Sharpen interview performance with mock rounds, strategy sessions, and advanced review loops.',
+        overview:
+          'Designed for students entering placement season, this path focuses on answering clearly, thinking under time pressure, and translating solutions into strong interview communication.',
+        modules: [
+          'Module 1 - Problem framing and interview communication',
+          'Module 2 - High-frequency DSA patterns',
+          'Module 3 - Mock interviews and scoring',
+          'Module 4 - Revision system and final sprint'
+        ],
+        lessons: [
+          'Behavioral answer structures for HR rounds',
+          'Whiteboard walkthroughs for tricky DSA topics',
+          'Mock interview debrief with improvement plan'
+        ],
+        featured: false,
+        popular: true,
+        videoUrl: '',
+        certificateEnabled: true,
+        defaultProgress: 72
+      }
+    ],
     updates: [
       {
         id: 'upd-1',
@@ -91,11 +227,15 @@
       updates: Array.isArray(stored.updates) ? stored.updates : defaults.updates,
       articles: Array.isArray(stored.articles) ? stored.articles : defaults.articles,
       problems: Array.isArray(stored.problems) ? stored.problems : defaults.problems,
+      courses: Array.isArray(stored.courses) ? stored.courses : defaults.courses,
       bookmarks: {
         updates: Array.isArray(stored.bookmarks?.updates) ? stored.bookmarks.updates : [],
         problems: Array.isArray(stored.bookmarks?.problems) ? stored.bookmarks.problems : [],
         articles: Array.isArray(stored.bookmarks?.articles) ? stored.bookmarks.articles : []
       },
+      courseProgress:
+        stored.courseProgress && typeof stored.courseProgress === 'object' ? stored.courseProgress : {},
+      currentCourseId: typeof stored.currentCourseId === 'string' ? stored.currentCourseId : '',
       submissions:
         stored.submissions && typeof stored.submissions === 'object' ? stored.submissions : {}
     };
@@ -130,6 +270,12 @@
     return getAll()[section] || [];
   }
 
+  function clampProgress(value) {
+    const number = Number(value);
+    if (Number.isNaN(number)) return 0;
+    return Math.max(0, Math.min(100, Math.round(number)));
+  }
+
   function saveList(section, list) {
     const data = getAll();
     data[section] = list;
@@ -154,6 +300,50 @@
 
   function getById(section, id) {
     return getList(section).find((item) => item.id === id) || null;
+  }
+
+  function getCourseProgress(courseId) {
+    const data = getAll();
+    const course = getById('courses', courseId);
+    if (!courseId) return 0;
+    const storedProgress = data.courseProgress?.[courseId];
+    if (typeof storedProgress === 'number') return clampProgress(storedProgress);
+    return clampProgress(course?.defaultProgress || 0);
+  }
+
+  function saveCourseProgress(courseId, progress) {
+    if (!courseId) return;
+    const data = getAll();
+    data.courseProgress = data.courseProgress || {};
+    data.courseProgress[courseId] = clampProgress(progress);
+    data.currentCourseId = courseId;
+    write(data);
+  }
+
+  function getCurrentCourseId() {
+    return getAll().currentCourseId || '';
+  }
+
+  function setCurrentCourseId(courseId) {
+    const data = getAll();
+    data.currentCourseId = courseId || '';
+    write(data);
+  }
+
+  function saveCourse(course) {
+    return upsert('courses', course);
+  }
+
+  function removeCourse(courseId) {
+    remove('courses', courseId);
+    const data = getAll();
+    if (data.currentCourseId === courseId) {
+      data.currentCourseId = '';
+    }
+    if (data.courseProgress && typeof data.courseProgress === 'object') {
+      delete data.courseProgress[courseId];
+    }
+    write(data);
   }
 
   function getSettings() {
@@ -204,6 +394,12 @@
     isBookmarked,
     saveSubmission,
     getSubmission,
+    getCourseProgress,
+    saveCourseProgress,
+    getCurrentCourseId,
+    setCurrentCourseId,
+    saveCourse,
+    removeCourse,
     generateId
   };
 })();

@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700;800&family=Space+Grotesk:wght@500;600;700&family=Sora:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="styles.css" />
@@ -33,6 +33,7 @@
       </button>
       <nav id="main-nav">
         <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
         <a href="jobs.html">Jobs</a>
         <a href="practice.html">Practice</a>
         <a href="articles.html">Articles</a>
@@ -41,102 +42,128 @@
     </header>
 
     <main class="page-wrap">
-      <section class="hero section reveal">
-        <p class="tiny-label">cohort style learning • practical + friendly</p>
-        <h1 data-edit-key="courses.heroTitle">Courses that feel doable, not overwhelming.</h1>
-        <p class="hero-subtext" data-edit-key="courses.heroSubtext">
-          Every course here is designed around student pace. Clear explanations,
-          weekly tasks, and realistic milestones.
-        </p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="index.html#pricing">Join Waitlist</a>
-          <a class="btn btn-muted" href="ask-doubt.html">Talk to Mentor</a>
-        </div>
-      </section>
-
-      <section class="section reveal odd-shift">
-        <div class="section-intro">
-          <h2>Current Tracks</h2>
-          <p>Handpicked paths for beginners and growth-focused students.</p>
+      <section class="course-hero section reveal">
+        <div class="course-hero-copy">
+          <p class="tiny-label">premium learning platform • beginner friendly</p>
+          <h1 data-edit-key="courses.heroTitle">Courses that feel doable, not overwhelming.</h1>
+          <p class="hero-subtext" data-edit-key="courses.heroSubtext">
+            Every course here is designed around student pace. Clear explanations,
+            weekly tasks, and realistic milestones.
+          </p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="#all-courses">Browse Courses</a>
+            <a class="btn btn-muted" href="ask-doubt.html">Talk to Mentor</a>
+          </div>
         </div>
 
-        <div class="pricing-grid">
-          <article class="price-card">
-            <h3>DSA Sprint (8 Weeks)</h3>
-            <p class="price">Beginner + Intermediate</p>
-            <p>
-              Pattern-based training from arrays to graphs, with a weekly doubt
-              clinic.
-            </p>
+        <div class="course-hero-stats">
+          <article class="hero-stat-card">
+            <span class="hero-stat-label">Tracks</span>
+            <strong>3 learning paths</strong>
           </article>
-
-          <article class="price-card highlighted">
-            <h3>Web Dev Launchpad</h3>
-            <p class="price">Project-first</p>
-            <p>
-              HTML, CSS, JS with real mini projects. Resume-ready portfolio
-              guidance included.
-            </p>
+          <article class="hero-stat-card">
+            <span class="hero-stat-label">Mode</span>
+            <strong>Guided + project based</strong>
           </article>
-
-          <article class="price-card">
-            <h3>Interview Prep Room</h3>
-            <p class="price">Placement focused</p>
-            <p>
-              Mock rounds, HR + tech prep, and answer frameworks in simple
-              language.
-            </p>
+          <article class="hero-stat-card">
+            <span class="hero-stat-label">Certificate</span>
+            <strong>Optional on completion</strong>
           </article>
         </div>
       </section>
 
-      <section class="audience section reveal odd-shift-light">
+      <section class="section reveal">
         <div class="section-intro">
-          <h2>How Classes Run</h2>
-          <p>A clear routine so consistency builds naturally.</p>
+          <h2>Choose Your Learning Path</h2>
+          <p>Pick a direction and jump into a structured, beginner-friendly course cluster.</p>
         </div>
-        <div class="audience-row">
-          <div>Live sessions: 3 days/week, recorded backup always</div>
-          <div>Practice sheets + checkpoints every weekend</div>
-          <div>Mentor review for selected assignments</div>
+
+        <div class="path-grid">
+          <button class="path-card" type="button" data-path-filter="Web Development">
+            <p class="course-category">Web Development</p>
+            <h3>Frontend systems, projects, and UI polish</h3>
+            <p>Build websites, dashboards, and product-style interfaces with modern HTML, CSS, and JavaScript.</p>
+          </button>
+          <button class="path-card" type="button" data-path-filter="Data Structures &amp; Algorithms">
+            <p class="course-category">Data Structures &amp; Algorithms</p>
+            <h3>Patterns, problem solving, and interview prep</h3>
+            <p>Train for placements with practical drills, revision loops, and high-frequency coding topics.</p>
+          </button>
+          <button class="path-card" type="button" data-path-filter="Python / AI">
+            <p class="course-category">Python / AI</p>
+            <h3>Automation, notebooks, and applied AI</h3>
+            <p>Learn Python fundamentals, data handling, and simple AI workflows for future-ready projects.</p>
+          </button>
         </div>
       </section>
 
-      <section class="dashboard section reveal">
+      <section class="section reveal">
         <div class="section-intro">
-          <h2>Sample Weekly Flow</h2>
-          <p>A simple schedule that fits student life.</p>
+          <h2>Continue Learning</h2>
+          <p>Resume the course you were last viewing. Progress is saved locally in this demo.</p>
+        </div>
+        <div id="continue-learning-root" class="continue-learning-root"></div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-intro">
+          <h2>Featured Courses</h2>
+          <p>Highlighted courses for learners starting a new path or leveling up fast.</p>
+        </div>
+        <div id="featured-courses" class="course-grid"></div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-intro">
+          <h2>Popular Courses</h2>
+          <p>The courses most students are using for active practice and portfolio building.</p>
+        </div>
+        <div id="popular-courses" class="course-grid"></div>
+      </section>
+
+      <section class="section reveal" id="all-courses">
+        <div class="section-intro">
+          <h2>All Courses</h2>
+          <p id="course-count">Loading courses...</p>
         </div>
 
-        <div class="dashboard-card">
-          <div class="dash-head">
-            <h3>Week Plan: DSA Sprint Batch B</h3>
-            <span>Starts Monday</span>
-          </div>
+        <div class="course-filter-bar">
+          <input id="course-search" class="course-search" type="search" placeholder="Search a course" aria-label="Search courses" />
+          <select id="level-filter" class="course-filter-select" aria-label="Filter by level">
+            <option value="all">All levels</option>
+            <option value="beginner">Beginner</option>
+            <option value="intermediate">Intermediate</option>
+            <option value="advanced">Advanced</option>
+          </select>
+          <select id="path-filter" class="course-filter-select" aria-label="Filter by learning path">
+            <option value="all">All paths</option>
+            <option value="Web Development">Web Development</option>
+            <option value="Data Structures & Algorithms">Data Structures &amp; Algorithms</option>
+            <option value="Python / AI">Python / AI</option>
+          </select>
+        </div>
 
-          <div class="dash-stats">
-            <div class="stat">
-              <p class="label">Live Classes</p>
-              <strong>3</strong>
-            </div>
-            <div class="stat">
-              <p class="label">Practice Sets</p>
-              <strong>2</strong>
-            </div>
-            <div class="stat">
-              <p class="label">Mentor Slots</p>
-              <strong>12</strong>
-            </div>
-          </div>
+        <div id="course-grid" class="course-grid course-grid-wide"></div>
+      </section>
 
-          <div class="task-list">
-            <p>Week target:</p>
-            <ul>
-              <li>Sliding Window pattern complete</li>
-              <li>One timed contest</li>
-              <li>Debugging assignment submit</li>
-            </ul>
-          </div>
+      <section class="section reveal">
+        <div class="section-intro">
+          <h2>Premium Learning Experience</h2>
+          <p>Built to feel like a modern platform, while staying simple for first-time learners.</p>
+        </div>
+        <div class="experience-grid">
+          <article class="experience-card">
+            <h3>Video lesson placeholders</h3>
+            <p>Each course page includes a slot for future embedded lectures or upload links.</p>
+          </article>
+          <article class="experience-card">
+            <h3>Progress tracking</h3>
+            <p>Progress is shown per course and continues across visits with local JSON storage.</p>
+          </article>
+          <article class="experience-card">
+            <h3>Certificate ready</h3>
+            <p>Courses can expose an optional completion certificate without redesigning the page later.</p>
+          </article>
         </div>
       </section>
     </main>

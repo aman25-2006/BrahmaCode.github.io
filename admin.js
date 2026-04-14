@@ -222,6 +222,17 @@ function formatDate(input) {
   return date.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
 }
 
+function parseLineItems(value) {
+  return String(value || '')
+    .split(/\r?\n/)
+    .map((item) => item.trim())
+    .filter(Boolean);
+}
+
+function joinLineItems(items) {
+  return Array.isArray(items) ? items.join('\n') : '';
+}
+
 function initTabs() {
   const buttons = Array.from(document.querySelectorAll('.sidebar-link'));
   const tabs = Array.from(document.querySelectorAll('.admin-tab'));
@@ -274,13 +285,15 @@ function initOverview() {
   const updates = window.BCStore.getList('updates').length;
   const problems = window.BCStore.getList('problems').length;
   const articles = window.BCStore.getList('articles').length;
+  const courses = window.BCStore.getList('courses').length;
 
   root.innerHTML = `
     <article class="content-card"><p class="tiny-label">updates</p><h3>${updates}</h3><p>Total job/internship/exam updates</p></article>
     <article class="content-card"><p class="tiny-label">problems</p><h3>${problems}</h3><p>Total coding practice problems</p></article>
     <article class="content-card"><p class="tiny-label">articles</p><h3>${articles}</h3><p>Total published articles</p></article>
+    <article class="content-card"><p class="tiny-label">courses</p><h3>${courses}</h3><p>Total live courses available</p></article>
   `;
-  console.log(`Overview initialized: ${updates} updates, ${problems} problems, ${articles} articles`);
+  console.log(`Overview initialized: ${updates} updates, ${problems} problems, ${articles} articles, ${courses} courses`);
 }
 
 function initSettingsManager() {
@@ -531,6 +544,94 @@ function bindArticlesManager() {
   render();
 }
 
+function bindCoursesManager() {
+  const form = byId('course-form');
+  const list = byId('admin-courses-list');
+  const note = byId('course-note');
+  if (!form || !list || !note) {
+    console.warn('Courses manager: form, list, or note not found');
+    return;
+  }
+  if (!ensureBCStore()) return;
+
+  function render() {
+    const courses = window.BCStore.getList('courses');
+    list.innerHTML = courses.length
+      ? courses
+          .map(
+            (item) => `<div class="admin-row stack-on-mobile">
+          <span><strong>${item.title}</strong><br /><small>${item.level} • ${item.duration} • ${item.category}</small></span>
+          <div class="row-actions">
+            <button type="button" class="btn btn-muted edit-course" data-id="${item.id}">Edit</button>
+            <button type="button" class="btn btn-muted remove-course" data-id="${item.id}">Delete</button>
+          </div>
+        </div>`
+          )
+          .join('')
+      : '<p class="form-note">No courses created yet.</p>';
+
+    list.querySelectorAll('.edit-course').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const item = window.BCStore.getById('courses', btn.getAttribute('data-id'));
+        if (!item) return;
+        byId('course-id').value = item.id;
+        byId('course-title').value = item.title || '';
+        byId('course-level').value = item.level || 'Beginner';
+        byId('course-duration').value = item.duration || '';
+        byId('course-category').value = item.category || 'Web Development';
+        byId('course-description').value = item.description || '';
+        byId('course-overview').value = item.overview || '';
+        byId('course-modules').value = joinLineItems(item.modules);
+        byId('course-lessons').value = joinLineItems(item.lessons);
+        byId('course-video-url').value = item.videoUrl || '';
+        byId('course-progress').value = item.defaultProgress ?? 0;
+        byId('course-featured').checked = Boolean(item.featured);
+        byId('course-popular').checked = Boolean(item.popular);
+        byId('course-certificate').checked = item.certificateEnabled !== false;
+      });
+    });
+
+    list.querySelectorAll('.remove-course').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        window.BCStore.removeCourse(btn.getAttribute('data-id'));
+        render();
+        initOverview();
+      });
+    });
+  }
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    window.BCStore.saveCourse({
+      id: byId('course-id').value || undefined,
+      title: byId('course-title').value.trim(),
+      level: byId('course-level').value,
+      duration: byId('course-duration').value.trim(),
+      category: byId('course-category').value,
+      description: byId('course-description').value.trim(),
+      overview: byId('course-overview').value.trim(),
+      modules: parseLineItems(byId('course-modules').value),
+      lessons: parseLineItems(byId('course-lessons').value),
+      videoUrl: byId('course-video-url').value.trim(),
+      defaultProgress: Number(byId('course-progress').value || 0),
+      featured: byId('course-featured').checked,
+      popular: byId('course-popular').checked,
+      certificateEnabled: byId('course-certificate').checked
+    });
+
+    form.reset();
+    byId('course-id').value = '';
+    byId('course-progress').value = 0;
+    byId('course-certificate').checked = true;
+    note.textContent = 'Course saved.';
+    note.classList.add('success');
+    render();
+    initOverview();
+  });
+
+  render();
+}
+
 async function renderAdminList() {
   const container = byId('admin-list');
   if (!container) return;
@@ -600,6 +701,7 @@ async function initAdminPanel() {
   bindUpdatesManager();
   bindProblemsManager();
   bindArticlesManager();
+  bindCoursesManager();
 
   const addAdminForm = byId('add-admin-form');
   const adminNote = byId('admin-manage-note');

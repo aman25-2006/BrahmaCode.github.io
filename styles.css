@@ -568,6 +568,325 @@ body {
   font-weight: 700;
 }
 
+.course-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 0.9fr);
+  gap: 16px;
+  align-items: stretch;
+  margin-top: 50px;
+}
+
+.course-hero-copy,
+.continue-card,
+.detail-hero,
+.detail-panel,
+.experience-card,
+.hero-stat-card,
+.path-card,
+.course-card,
+.course-detail-shell {
+  background: rgba(15, 24, 49, 0.66);
+  border: 1px solid rgba(131, 170, 245, 0.26);
+  border-radius: 18px;
+  backdrop-filter: blur(11px);
+  box-shadow: var(--shadow);
+}
+
+.course-hero-copy {
+  padding: 24px;
+}
+
+.course-hero-stats {
+  display: grid;
+  gap: 12px;
+}
+
+.hero-stat-card {
+  padding: 16px;
+}
+
+.hero-stat-label,
+.course-category,
+.lesson-label {
+  display: inline-block;
+  margin: 0 0 6px;
+  font-size: 0.78rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  color: #8fa4ce;
+}
+
+.hero-stat-card strong {
+  display: block;
+  font-family: "Sora", sans-serif;
+  font-size: 1.05rem;
+  color: #f5f9ff;
+}
+
+.path-grid,
+.experience-grid,
+.course-grid,
+.lesson-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.path-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.path-card {
+  padding: 18px;
+  text-align: left;
+  cursor: pointer;
+  transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+  color: var(--ink);
+}
+
+.path-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(133, 206, 255, 0.55);
+  box-shadow: 0 16px 32px rgba(7, 14, 28, 0.48);
+}
+
+.path-card h3,
+.experience-card h3,
+.course-card h3,
+.detail-panel h2,
+.detail-hero h1,
+.continue-card h3 {
+  font-family: "Sora", sans-serif;
+  margin: 0 0 8px;
+}
+
+.course-filter-bar {
+  margin: 14px 0 16px;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) repeat(2, minmax(0, 0.8fr));
+  gap: 10px;
+}
+
+.course-search,
+.course-filter-select {
+  width: 100%;
+  font: inherit;
+  color: #eef5ff;
+  background: rgba(16, 27, 52, 0.78);
+  border: 1px solid rgba(128, 160, 230, 0.34);
+  border-radius: 12px;
+  padding: 12px 14px;
+}
+
+.course-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.course-grid-wide {
+  margin-top: 6px;
+}
+
+.course-card {
+  padding: 18px;
+}
+
+.course-card-compact {
+  padding: 16px;
+}
+
+.course-card-head,
+.continue-card-top,
+.detail-hero-grid,
+.detail-progress-value {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.course-meta-stack {
+  display: grid;
+  justify-items: end;
+  gap: 6px;
+}
+
+.course-level,
+.course-duration {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: rgba(24, 38, 74, 0.88);
+  border: 1px solid rgba(139, 176, 249, 0.22);
+  color: #dfe9fb;
+  font-size: 0.8rem;
+}
+
+.course-description,
+.detail-summary,
+.detail-progress-note,
+.experience-card p,
+.path-card p,
+.continue-card p,
+.course-card p {
+  color: #b4c6e9;
+}
+
+.course-tags {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin: 8px 0 12px;
+}
+
+.course-chip {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: rgba(51, 102, 241, 0.16);
+  border: 1px solid rgba(110, 155, 255, 0.35);
+  color: #e7f1ff;
+  font-size: 0.78rem;
+}
+
+.course-chip-soft {
+  background: rgba(82, 61, 214, 0.2);
+}
+
+.course-progress-block,
+.detail-progress-card,
+.continue-card,
+.detail-panel,
+.experience-card,
+.course-detail-shell {
+  padding: 18px;
+}
+
+.course-progress-label,
+.detail-progress-value {
+  align-items: baseline;
+}
+
+.course-progress-label span,
+.detail-progress-value span {
+  color: #91a7cf;
+  font-size: 0.88rem;
+}
+
+.course-progress-track {
+  margin-top: 8px;
+}
+
+.continue-learning-root {
+  display: grid;
+}
+
+.continue-card {
+  max-width: 820px;
+}
+
+.continue-progress strong {
+  display: block;
+  font-family: "Sora", sans-serif;
+  font-size: 1.3rem;
+}
+
+.continue-progress small {
+  color: #8fa4ce;
+}
+
+.experience-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.experience-card,
+.detail-panel {
+  padding: 18px;
+}
+
+.detail-panel h2 {
+  font-size: 1.18rem;
+}
+
+.detail-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 16px;
+}
+
+.detail-hero {
+  padding: 22px;
+}
+
+.detail-hero-grid {
+  align-items: start;
+}
+
+.detail-meta {
+  margin: 10px 0 12px;
+  color: #91a7cf;
+}
+
+.detail-progress-card {
+  min-width: 280px;
+  align-self: stretch;
+}
+
+.detail-progress-value strong {
+  font-family: "Sora", sans-serif;
+  font-size: 2rem;
+  color: #f7fbff;
+}
+
+.module-list {
+  margin: 0;
+  padding-left: 18px;
+  display: grid;
+  gap: 10px;
+  color: #c7d6f0;
+}
+
+.lesson-grid {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.lesson-card,
+.video-placeholder,
+.certificate-card {
+  border-radius: 14px;
+  border: 1px solid rgba(132, 170, 255, 0.2);
+  background: rgba(10, 18, 37, 0.72);
+  padding: 14px;
+}
+
+.lesson-card h4 {
+  margin: 0 0 6px;
+  font-size: 1rem;
+}
+
+.video-placeholder span {
+  display: block;
+  font-family: "Sora", sans-serif;
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+.video-placeholder p,
+.certificate-card p,
+.lesson-card p {
+  margin: 0;
+  color: #b4c6e9;
+}
+
+.course-detail-shell {
+  margin-top: 42px;
+}
+
+.form-note {
+  color: #b4c6e9;
+}
+
 .footer {
   border-top: 1px solid rgba(120, 157, 226, 0.22);
   padding-top: 20px;
@@ -1186,8 +1505,23 @@ body {
   .pricing-grid,
   .feature-cards,
   .audience-row,
-  .content-grid {
+  .content-grid,
+  .course-grid,
+  .path-grid,
+  .experience-grid,
+  .detail-grid,
+  .lesson-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .course-hero,
+  .detail-hero-grid,
+  .course-filter-bar {
+    grid-template-columns: 1fr;
+  }
+
+  .course-meta-stack {
+    justify-items: start;
   }
 
   .saas-grid {
@@ -1244,8 +1578,24 @@ body {
   .feature-cards,
   .audience-row,
   .dash-stats,
-  .content-grid {
+  .content-grid,
+  .course-grid,
+  .path-grid,
+  .experience-grid,
+  .detail-grid,
+  .lesson-grid {
     grid-template-columns: 1fr;
+  }
+
+  .course-card-head,
+  .continue-card-top,
+  .detail-hero-grid,
+  .detail-progress-value {
+    flex-direction: column;
+  }
+
+  .course-meta-stack {
+    justify-items: start;
   }
 
   .menu-toggle {
