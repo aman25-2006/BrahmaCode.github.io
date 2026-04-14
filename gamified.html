@@ -37,49 +37,56 @@
     </header>
 
     <main class="page-wrap" id="gamified-root">
-      <section class="hero section reveal">
-        <p class="tiny-label">game on • consistency engine • daily momentum</p>
-        <h1>Gamified Learning Arena</h1>
-        <p class="hero-subtext">Earn points, protect your streak, unlock badges, and climb the leaderboard while you learn.</p>
-        <div class="hero-cta">
-          <a class="btn btn-primary" href="#daily-challenge-card">Start Daily Challenge</a>
-          <a class="btn btn-muted" href="practice.html">Solve Coding Problem</a>
-        </div>
-      </section>
-
-      <section class="section reveal">
+      <section class="section reveal gamified-dashboard">
         <div class="section-intro">
-          <h2>Dashboard</h2>
-          <p>Your live gamified stats update as soon as you complete actions.</p>
+          <p class="tiny-label">game mode active</p>
+          <h1>Gamified Dashboard</h1>
+          <p>Track your streak, points, and level while playing learning challenges.</p>
         </div>
+
         <div class="gamified-stat-grid">
           <article class="gamified-stat-card">
+            <span class="gm-stat-icon fire"><i class="fa-solid fa-fire"></i></span>
+            <p>Streak</p>
+            <h3 id="gm-streak">0 days</h3>
+          </article>
+          <article class="gamified-stat-card">
+            <span class="gm-stat-icon star"><i class="fa-solid fa-star"></i></span>
             <p>Points</p>
             <h3 id="gm-points">0</h3>
           </article>
           <article class="gamified-stat-card">
-            <p>Current Streak</p>
-            <h3 id="gm-streak">0 days</h3>
-          </article>
-          <article class="gamified-stat-card">
+            <span class="gm-stat-icon trophy"><i class="fa-solid fa-trophy"></i></span>
             <p>Rank</p>
             <h3 id="gm-rank">Bronze</h3>
           </article>
           <article class="gamified-stat-card">
+            <span class="gm-stat-icon badge"><i class="fa-solid fa-medal"></i></span>
             <p>Badges</p>
             <h3 id="gm-badge-count">0 unlocked</h3>
           </article>
         </div>
+
+        <article class="gm-level-card">
+          <div class="gm-level-head">
+            <p class="tiny-label">Level Progress</p>
+            <h3 id="gm-level">Level 1</h3>
+          </div>
+          <div class="progress-track gm-progress-track">
+            <span class="progress-fill gm-progress-fill" id="gm-progress-fill"></span>
+          </div>
+          <p class="form-note gm-progress-text" id="gm-progress-text">0 / 100 XP to next level</p>
+        </article>
       </section>
 
       <section class="section reveal">
         <div class="section-intro">
-          <h2>Challenge Zone</h2>
-          <p>Try mini-games and challenges to earn bonus XP.</p>
+          <h2>Play Games</h2>
+          <p>Choose a game mode and earn quick XP boosts.</p>
         </div>
         <div class="gamified-game-grid">
           <article class="gamified-game-card" id="quiz-card">
-            <p class="tiny-label">Quiz Battle</p>
+            <p class="tiny-label">Quiz</p>
             <h3>Quick Quiz</h3>
             <p>What is the time complexity of merge sort?</p>
             <div class="quiz-options" id="quiz-options">
@@ -88,6 +95,7 @@
               <button type="button" class="btn btn-muted" data-quiz-answer="O(n log n)">O(n log n)</button>
               <button type="button" class="btn btn-muted" data-quiz-answer="O(n^2)">O(n^2)</button>
             </div>
+            <button type="button" class="btn btn-primary gm-play-btn" data-game-target="quiz-card">Play Now</button>
             <p class="form-note" id="quiz-note"></p>
           </article>
 
@@ -101,15 +109,8 @@ console.log(arr.map((x) => x / 2).join("-"));</pre>
               <button type="button" class="btn btn-muted" data-output-answer="2-4-6">2-4-6</button>
               <button type="button" class="btn btn-muted" data-output-answer="3-2-1">3-2-1</button>
             </div>
+            <button type="button" class="btn btn-primary gm-play-btn" data-game-target="output-game-card">Play Now</button>
             <p class="form-note" id="output-note"></p>
-          </article>
-
-          <article class="gamified-game-card" id="daily-challenge-card">
-            <p class="tiny-label">Daily Mission</p>
-            <h3 id="daily-title">Daily Challenge</h3>
-            <p id="daily-description"></p>
-            <button id="daily-complete-btn" class="btn btn-primary" type="button">Complete Daily Challenge (+20)</button>
-            <p class="form-note" id="daily-note"></p>
           </article>
 
           <article class="gamified-game-card" id="speed-card">
@@ -121,7 +122,25 @@ console.log(arr.map((x) => x / 2).join("-"));</pre>
               <input id="speed-answer" type="text" placeholder="Type answer here" />
               <button class="btn btn-primary" id="speed-submit-btn" type="button">Submit</button>
             </div>
+            <button type="button" class="btn btn-primary gm-play-btn" data-game-target="speed-card" data-game-action="speed-start">Play Now</button>
             <p class="form-note" id="speed-note"></p>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-intro">
+          <h2>Challenges</h2>
+          <p>Complete daily tasks and coding puzzles for bonus rewards.</p>
+        </div>
+        <div class="gamified-game-grid gamified-challenge-grid">
+          <article class="gamified-game-card" id="daily-challenge-card">
+            <p class="tiny-label">Daily Challenge</p>
+            <h3 id="daily-title">Daily Challenge</h3>
+            <p id="daily-description"></p>
+            <button id="daily-complete-btn" class="btn btn-primary" type="button">Complete Daily Challenge (+20)</button>
+            <button type="button" class="btn btn-muted gm-play-btn" data-game-target="daily-challenge-card">Play Now</button>
+            <p class="form-note" id="daily-note"></p>
           </article>
 
           <article class="gamified-game-card" id="puzzle-card">
@@ -133,23 +152,29 @@ console.log(arr.map((x) => x / 2).join("-"));</pre>
               <button type="button" class="btn btn-muted" data-puzzle-answer="hash-dll">HashMap + Doubly Linked List</button>
               <button type="button" class="btn btn-muted" data-puzzle-answer="queue">Queue + Set</button>
             </div>
+            <button type="button" class="btn btn-primary gm-play-btn" data-game-target="puzzle-card">Play Now</button>
             <p class="form-note" id="puzzle-note"></p>
-          </article>
-
-          <article class="gamified-game-card">
-            <p class="tiny-label">Leaderboard</p>
-            <h3>Top Learners</h3>
-            <div id="leaderboard-list" class="leaderboard-list"></div>
           </article>
         </div>
       </section>
 
       <section class="section reveal">
         <div class="section-intro">
-          <h2>Badge Vault</h2>
-          <p>Unlock badges by solving, helping peers, and showing consistency.</p>
+          <h2>Achievements</h2>
+          <p>Track your leaderboard standing and unlocked badges.</p>
         </div>
-        <div id="badge-grid" class="badge-grid"></div>
+        <div class="gamified-game-grid gamified-achievement-grid">
+          <article class="gamified-game-card">
+            <p class="tiny-label">Leaderboard</p>
+            <h3>Top Learners</h3>
+            <div id="leaderboard-list" class="leaderboard-list"></div>
+          </article>
+          <article class="gamified-game-card">
+            <p class="tiny-label">Badges</p>
+            <h3>Badge Vault</h3>
+            <div id="badge-grid" class="badge-grid"></div>
+          </article>
+        </div>
       </section>
 
       <section class="section reveal">

@@ -1819,6 +1819,16 @@ body::before {
   align-content: start;
 }
 
+.gamified-dashboard {
+  margin-top: 52px;
+}
+
+.gamified-dashboard .section-intro h1 {
+  font-family: "Sora", sans-serif;
+  font-size: clamp(2.2rem, 5vw, 3.4rem);
+  margin: 4px 0 10px;
+}
+
 .gamified-stat-grid {
   margin-top: 14px;
   display: grid;
@@ -1827,11 +1837,38 @@ body::before {
 }
 
 .gamified-stat-card {
+  position: relative;
+  overflow: hidden;
   border-radius: 16px;
   border: 1px solid rgba(122, 166, 248, 0.34);
   background: radial-gradient(circle at top right, rgba(73, 117, 245, 0.24), rgba(10, 18, 39, 0.9));
   padding: 16px;
   box-shadow: var(--shadow);
+}
+
+.gm-stat-icon {
+  width: 34px;
+  height: 34px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+  border: 1px solid rgba(142, 176, 244, 0.4);
+  background: rgba(25, 42, 84, 0.7);
+}
+
+.gm-stat-icon.fire {
+  color: #ff9f5d;
+}
+
+.gm-stat-icon.star {
+  color: #ffd463;
+}
+
+.gm-stat-icon.trophy,
+.gm-stat-icon.badge {
+  color: #8ed9ff;
 }
 
 .gamified-stat-card p {
@@ -1847,11 +1884,54 @@ body::before {
   font-family: "Sora", sans-serif;
 }
 
+.gm-level-card {
+  margin-top: 14px;
+  border-radius: 16px;
+  border: 1px solid rgba(119, 166, 248, 0.32);
+  background: linear-gradient(140deg, rgba(10, 20, 42, 0.92), rgba(8, 14, 31, 0.9));
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.gm-level-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: baseline;
+}
+
+.gm-level-head h3 {
+  margin: 0;
+  font-family: "Sora", sans-serif;
+  font-size: 1.26rem;
+}
+
+.gm-progress-track {
+  margin-top: 10px;
+  height: 14px;
+  background: rgba(33, 49, 84, 0.92);
+  border: 1px solid rgba(117, 157, 236, 0.25);
+}
+
+.gm-progress-fill {
+  background: linear-gradient(90deg, #f5a24f, #ffd16a 40%, #58d7ff 100%);
+}
+
+.gm-progress-text {
+  margin-top: 9px;
+  color: #c5d8fb;
+}
+
 .gamified-game-grid {
   margin-top: 14px;
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 12px;
+}
+
+.gamified-challenge-grid,
+.gamified-achievement-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
 .gamified-game-card {
@@ -1867,6 +1947,29 @@ body::before {
   transform: translateY(-4px) scale(1.03);
   border-color: rgba(139, 211, 255, 0.64);
   box-shadow: 0 16px 32px rgba(7, 15, 33, 0.54);
+}
+
+.gamified-game-card.is-active {
+  animation: gamePulse 0.65s ease;
+}
+
+@keyframes gamePulse {
+  0% {
+    transform: scale(1);
+    border-color: rgba(118, 162, 247, 0.34);
+  }
+  50% {
+    transform: scale(1.02);
+    border-color: rgba(255, 209, 106, 0.8);
+  }
+  100% {
+    transform: scale(1);
+    border-color: rgba(118, 162, 247, 0.34);
+  }
+}
+
+.gm-play-btn {
+  margin-top: 10px;
 }
 
 .gm-code {
@@ -1924,7 +2027,7 @@ body::before {
 .badge-grid {
   margin-top: 14px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
@@ -1959,6 +2062,19 @@ body::before {
   color: #8fcbb3;
 }
 
+.gamified-game-card .form-note {
+  margin-top: 10px;
+  color: #b9ccef;
+}
+
+.gamified-game-card .form-note.success {
+  color: #89efbd;
+}
+
+.gamified-game-card .form-note.error {
+  color: #ff9f9f;
+}
+
 /* Small reveal animation: keeps page lively without overdoing it */
 .reveal {
   opacity: 0;
@@ -1988,6 +2104,11 @@ body::before {
   .gamified-game-grid,
   .badge-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .gm-level-head {
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .course-hero,

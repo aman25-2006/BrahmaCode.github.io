@@ -164,6 +164,20 @@
     return "Bronze";
   }
 
+  function computeLevelProgress(points) {
+    const xp = Number(points || 0);
+    const levelSize = 100;
+    const level = Math.floor(xp / levelSize) + 1;
+    const current = xp % levelSize;
+    const percent = Math.min(100, Math.round((current / levelSize) * 100));
+    return {
+      level,
+      current,
+      next: levelSize,
+      percent
+    };
+  }
+
   function pushActivity(state, text) {
     state.activity.unshift({ text, at: Date.now() });
     if (state.activity.length > 20) {
@@ -295,11 +309,19 @@
 
     const state = readState();
     const rank = computeRank(state.points);
+    const progress = computeLevelProgress(state.points);
 
     if (byId("gm-points")) byId("gm-points").textContent = String(state.points);
     if (byId("gm-streak")) byId("gm-streak").textContent = `${state.streak} days`;
     if (byId("gm-rank")) byId("gm-rank").textContent = rank;
     if (byId("gm-badge-count")) byId("gm-badge-count").textContent = `${state.badges.length} unlocked`;
+    if (byId("gm-level")) byId("gm-level").textContent = `Level ${progress.level}`;
+    if (byId("gm-progress-text")) {
+      byId("gm-progress-text").textContent = `${progress.current} / ${progress.next} XP to next level`;
+    }
+    if (byId("gm-progress-fill")) {
+      byId("gm-progress-fill").style.width = `${progress.percent}%`;
+    }
 
     const badgeGrid = byId("badge-grid");
     if (badgeGrid) {
@@ -349,6 +371,13 @@
     }
   }
 
+  function setFeedback(noteEl, text, isSuccess) {
+    if (!noteEl) return;
+    noteEl.textContent = text;
+    noteEl.classList.toggle("success", !!isSuccess);
+    noteEl.classList.toggle("error", !isSuccess);
+  }
+
   function initQuizGame() {
     const note = byId("quiz-note");
     document.querySelectorAll("[data-quiz-answer]").forEach((button) => {
@@ -359,11 +388,9 @@
             key: `quiz-correct-${todayKey()}`,
             reason: "Won quick quiz"
           });
-          note.textContent = result.awarded ? "Correct! +12 points earned." : "Correct, already claimed today.";
-          note.classList.add("success");
+          setFeedback(note, result.awarded ? "Correct! +12 points earned." : "Correct, already claimed today.", true);
         } else {
-          note.textContent = "Not correct yet. Try once more.";
-          note.classList.remove("success");
+          setFeedback(note, "Incorrect answer. Try once more.", false);
         }
         renderGamifiedDashboard();
       });
@@ -380,11 +407,9 @@
             key: `output-correct-${todayKey()}`,
             reason: "Solved guess output challenge"
           });
-          note.textContent = result.awarded ? "Correct! +8 points earned." : "Already solved. Great memory.";
-          note.classList.add("success");
+          setFeedback(note, result.awarded ? "Correct! +8 points earned." : "Already solved. Great memory.", true);
         } else {
-          note.textContent = "Wrong output. Read the map logic once more.";
-          note.classList.remove("success");
+          setFeedback(note, "Incorrect output. Read the map logic once more.", false);
         }
         renderGamifiedDashboard();
       });
@@ -398,8 +423,7 @@
 
     button.addEventListener("click", () => {
       const result = completeDailyChallenge();
-      note.textContent = result.awarded ? "Challenge completed! +20 points earned." : "Daily challenge already completed today.";
-      note.classList.toggle("success", result.awarded);
+      setFeedback(note, result.awarded ? "Challenge completed! +20 points earned." : "Daily challenge already completed today.", result.awarded);
       renderGamifiedDashboard();
     });
   }
@@ -415,22 +439,19 @@
 
     startBtn.addEventListener("click", () => {
       startedAt = Date.now();
-      note.textContent = "Timer started. Enter output and submit.";
-      note.classList.remove("success");
+      setFeedback(note, "Timer started. Enter output and submit.", true);
       answerInput.focus();
     });
 
     submitBtn.addEventListener("click", () => {
       if (!startedAt) {
-        note.textContent = "Start timer first.";
-        note.classList.remove("success");
+        setFeedback(note, "Start timer first.", false);
         return;
       }
 
       const answer = String(answerInput.value || "").trim();
       if (answer !== "2-4-6") {
-        note.textContent = "Incorrect output. Start again and retry.";
-        note.classList.remove("success");
+        setFeedback(note, "Incorrect output. Start again and retry.", false);
         return;
       }
 
@@ -442,10 +463,11 @@
       });
 
       const rounded = seconds.toFixed(1);
-      note.textContent = result.awarded
-        ? `Correct in ${rounded}s. +15 points earned.`
-        : `Correct in ${rounded}s. Points already claimed.`;
-      note.classList.add("success");
+      setFeedback(
+        note,
+        result.awarded ? `Correct in ${rounded}s. +15 points earned.` : `Correct in ${rounded}s. Points already claimed.`,
+        true
+      );
       startedAt = 0;
       answerInput.value = "";
       renderGamifiedDashboard();
@@ -462,13 +484,30 @@
             key: `puzzle-correct-${todayKey()}`,
             reason: "Solved code puzzle"
           });
-          note.textContent = result.awarded ? "Perfect architecture choice. +10 points." : "Already solved this puzzle.";
-          note.classList.add("success");
+          setFeedback(note, result.awarded ? "Perfect architecture choice. +10 points." : "Already solved this puzzle.", true);
         } else {
-          note.textContent = "Not optimal for O(1) get/put with eviction.";
-          note.classList.remove("success");
+          setFeedback(note, "Incorrect choice for O(1) get/put with eviction.", false);
         }
         renderGamifiedDashboard();
+      });
+    });
+  }
+
+  function initPlayNowButtons() {
+    const speedStartBtn = byId("speed-start-btn");
+    document.querySelectorAll(".gm-play-btn").forEach((button) => {
+      button.addEventListener("click", () => {
+        const targetId = button.getAttribute("data-game-target");
+        const target = targetId ? byId(targetId) : button.closest(".gamified-game-card");
+        if (!target) return;
+
+        target.scrollIntoView({ behavior: "smooth", block: "center" });
+        target.classList.add("is-active");
+        setTimeout(() => target.classList.remove("is-active"), 700);
+
+        if (button.getAttribute("data-game-action") === "speed-start" && speedStartBtn) {
+          speedStartBtn.click();
+        }
       });
     });
   }
@@ -476,6 +515,7 @@
   function initGamifiedPage() {
     if (!byId("gamified-root")) return;
     renderGamifiedDashboard();
+    initPlayNowButtons();
     initQuizGame();
     initOutputGame();
     initDailyChallenge();
