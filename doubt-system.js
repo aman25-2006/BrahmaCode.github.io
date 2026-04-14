@@ -123,6 +123,11 @@
     return document.getElementById(id);
   }
 
+  function awardGamified(actionType, options) {
+    if (!window.BCGamify || typeof window.BCGamify.awardPoints !== "function") return;
+    window.BCGamify.awardPoints(actionType, options || {});
+  }
+
   function esc(value) {
     return String(value || "")
       .replace(/&/g, "&amp;")
@@ -245,7 +250,7 @@
   function localAddAnswer(doubtId, answerText) {
     const store = readLocalStore();
     const doubt = store.doubts.find((item) => item.id === doubtId);
-    if (!doubt) return;
+    if (!doubt) return "";
 
     const answer = {
       id: "answer-" + Date.now() + "-" + Math.floor(Math.random() * 10000),
@@ -259,6 +264,7 @@
     doubt.answers.unshift(answer);
     doubt.answersCount = doubt.answers.length;
     writeLocalStore(store);
+    return answer.id;
   }
 
   function localDeleteDoubt(doubtId) {
@@ -589,12 +595,12 @@
 
   async function createDoubt(payload) {
     if (!(await ensureFirebase())) {
-      localCreateDoubt(payload);
+      const created = localCreateDoubt(payload);
       await refreshDoubts();
-      return;
+      return created.id;
     }
 
-    await state.db.collection(DOUBTS_COLLECTION).add({
+    const createdRef = await state.db.collection(DOUBTS_COLLECTION).add({
       title: payload.title,
       description: payload.description,
       tags: payload.tags,
@@ -608,17 +614,18 @@
 
     await saveTags([...state.availableTags, ...payload.tags]);
     await refreshDoubts();
+    return createdRef.id;
   }
 
   async function createAnswer(doubtId, text) {
     if (!(await ensureFirebase())) {
-      localAddAnswer(doubtId, text);
+      const answerId = localAddAnswer(doubtId, text);
       await refreshDoubts();
-      return;
+      return answerId;
     }
 
     const doubtRef = state.db.collection(DOUBTS_COLLECTION).doc(doubtId);
-    await doubtRef.collection("answers").add({
+    const answerRef = await doubtRef.collection("answers").add({
       text,
       upvotes: 0,
       isHelpful: false,
@@ -633,6 +640,7 @@
     );
 
     await refreshDoubts();
+    return answerRef.id;
   }
 
   async function upvoteDoubt(doubtId) {
@@ -830,7 +838,13 @@
           return;
         }
 
-        await createAnswer(doubtId, text);
+        const answerId = await createAnswer(doubtId, text);
+        if (answerId) {
+          awardGamified("doubt_answered", {
+            key: `doubt-answer-${answerId}`,
+            reason: "Posted a community answer"
+          });
+        }
         note.textContent = "Answer posted.";
         note.classList.add("success");
         form.reset();
@@ -876,7 +890,13 @@
         return;
       }
 
-      await createDoubt({ title, description, code, tags });
+      const doubtId = await createDoubt({ title, description, code, tags });
+      if (doubtId) {
+        awardGamified("doubt_posted", {
+          key: `doubt-post-${doubtId}`,
+          reason: "Posted a coding doubt"
+        });
+      }
       note.textContent = "Doubt posted successfully.";
       note.classList.add("success");
       form.reset();

@@ -1786,6 +1786,179 @@ body::before {
   color: #174d3f;
 }
 
+.mini-gamified-grid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.mini-gamified-card {
+  border-radius: 16px;
+  border: 1px solid rgba(122, 166, 248, 0.34);
+  background: rgba(10, 18, 39, 0.72);
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.mini-gamified-card p {
+  margin: 0;
+  color: #a8bde7;
+  font-size: 0.85rem;
+}
+
+.mini-gamified-card h3 {
+  margin: 9px 0 0;
+  font-size: 1.28rem;
+  font-family: "Sora", sans-serif;
+}
+
+.mini-gamified-card-action {
+  display: grid;
+  gap: 10px;
+  align-content: start;
+}
+
+.gamified-stat-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.gamified-stat-card {
+  border-radius: 16px;
+  border: 1px solid rgba(122, 166, 248, 0.34);
+  background: radial-gradient(circle at top right, rgba(73, 117, 245, 0.24), rgba(10, 18, 39, 0.9));
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.gamified-stat-card p {
+  margin: 0;
+  color: #b4c8ec;
+  font-size: 0.83rem;
+  letter-spacing: 0.4px;
+}
+
+.gamified-stat-card h3 {
+  margin: 8px 0 0;
+  font-size: 1.42rem;
+  font-family: "Sora", sans-serif;
+}
+
+.gamified-game-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.gamified-game-card {
+  border-radius: 16px;
+  border: 1px solid rgba(118, 162, 247, 0.34);
+  background: rgba(10, 18, 39, 0.8);
+  padding: 16px;
+  box-shadow: var(--shadow);
+  transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+}
+
+.gamified-game-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  border-color: rgba(139, 211, 255, 0.64);
+  box-shadow: 0 16px 32px rgba(7, 15, 33, 0.54);
+}
+
+.gm-code {
+  margin: 10px 0 12px;
+  border-radius: 12px;
+  padding: 12px;
+  border: 1px solid rgba(132, 170, 243, 0.38);
+  background: rgba(6, 12, 27, 0.84);
+  color: #dbebff;
+  overflow: auto;
+}
+
+.quiz-options {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.speed-actions {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 8px;
+  align-items: center;
+}
+
+.speed-actions input {
+  width: 100%;
+  border: 1px solid rgba(137, 175, 244, 0.46);
+  border-radius: 10px;
+  background: rgba(5, 12, 25, 0.86);
+  color: #ecf4ff;
+  padding: 10px 12px;
+  font: inherit;
+}
+
+.leaderboard-list {
+  margin-top: 8px;
+  display: grid;
+  gap: 8px;
+}
+
+.leaderboard-list p {
+  margin: 0;
+  border: 1px solid rgba(130, 166, 235, 0.32);
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: rgba(4, 10, 24, 0.65);
+  color: #d9e9ff;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.badge-grid {
+  margin-top: 14px;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.badge-card {
+  border-radius: 14px;
+  padding: 14px;
+  border: 1px solid rgba(122, 165, 240, 0.28);
+  background: rgba(7, 14, 30, 0.75);
+  opacity: 0.74;
+  transition: opacity 0.2s ease, transform 0.2s ease, border-color 0.2s ease;
+}
+
+.badge-card.is-unlocked {
+  opacity: 1;
+  border-color: rgba(111, 232, 193, 0.58);
+  transform: translateY(-2px);
+}
+
+.badge-card h4 {
+  margin: 0;
+  font-family: "Sora", sans-serif;
+}
+
+.badge-card p {
+  margin: 7px 0 8px;
+  color: #abc1e8;
+  font-size: 0.88rem;
+}
+
+.badge-card span {
+  font-size: 0.82rem;
+  color: #8fcbb3;
+}
+
 /* Small reveal animation: keeps page lively without overdoing it */
 .reveal {
   opacity: 0;
@@ -1809,7 +1982,11 @@ body::before {
   .experience-grid,
   .detail-grid,
   .lesson-grid,
-  .future-grid {
+  .future-grid,
+  .mini-gamified-grid,
+  .gamified-stat-grid,
+  .gamified-game-grid,
+  .badge-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
@@ -1883,7 +2060,15 @@ body::before {
   .experience-grid,
   .detail-grid,
   .lesson-grid,
-  .future-grid {
+  .future-grid,
+  .mini-gamified-grid,
+  .gamified-stat-grid,
+  .gamified-game-grid,
+  .badge-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .speed-actions {
     grid-template-columns: 1fr;
   }
 

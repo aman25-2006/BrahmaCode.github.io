@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>BrahmaCode | Gamified Learning</title>
+    <meta name="description" content="Level up with points, streaks, badges, quizzes, and daily coding challenges on BrahmaCode." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Sora:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWix+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkR4j8z+fNfELxA/8A6xYv9KfB8z+R4N0iEA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="top-nav">
+      <a class="brand" href="index.html">
+        <img src="assets/brahmacode-logo.svg" alt="BrahmaCode logo" class="brand-logo" />
+        <span class="brand-text">Brahma<span>Code</span></span>
+      </a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="main-nav">
+        Menu
+      </button>
+      <nav id="main-nav">
+        <a href="index.html">Home</a>
+        <a href="courses.html">Courses</a>
+        <a href="practice.html">Practice</a>
+        <a href="ask-doubt.html">Doubts</a>
+        <a href="jobs.html">Jobs</a>
+        <a href="gamified.html">Gamified Learning</a>
+        <a href="admin-login.html">Admin</a>
+        <a href="google-login.html" class="nav-auth-link">Login</a>
+        <a href="google-login.html" class="nav-auth-link nav-auth-primary">Signup</a>
+      </nav>
+    </header>
+
+    <main class="page-wrap" id="gamified-root">
+      <section class="hero section reveal">
+        <p class="tiny-label">game on • consistency engine • daily momentum</p>
+        <h1>Gamified Learning Arena</h1>
+        <p class="hero-subtext">Earn points, protect your streak, unlock badges, and climb the leaderboard while you learn.</p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#daily-challenge-card">Start Daily Challenge</a>
+          <a class="btn btn-muted" href="practice.html">Solve Coding Problem</a>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-intro">
+          <h2>Dashboard</h2>
+          <p>Your live gamified stats update as soon as you complete actions.</p>
+        </div>
+        <div class="gamified-stat-grid">
+          <article class="gamified-stat-card">
+            <p>Points</p>
+            <h3 id="gm-points">0</h3>
+          </article>
+          <article class="gamified-stat-card">
+            <p>Current Streak</p>
+            <h3 id="gm-streak">0 days</h3>
+          </article>
+          <article class="gamified-stat-card">
+            <p>Rank</p>
+            <h3 id="gm-rank">Bronze</h3>
+          </article>
+          <article class="gamified-stat-card">
+            <p>Badges</p>
+            <h3 id="gm-badge-count">0 unlocked</h3>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-intro">
+          <h2>Challenge Zone</h2>
+          <p>Try mini-games and challenges to earn bonus XP.</p>
+        </div>
+        <div class="gamified-game-grid">
+          <article class="gamified-game-card" id="quiz-card">
+            <p class="tiny-label">Quiz Battle</p>
+            <h3>Quick Quiz</h3>
+            <p>What is the time complexity of merge sort?</p>
+            <div class="quiz-options" id="quiz-options">
+              <button type="button" class="btn btn-muted" data-quiz-answer="O(n)">O(n)</button>
+              <button type="button" class="btn btn-muted" data-quiz-answer="O(log n)">O(log n)</button>
+              <button type="button" class="btn btn-muted" data-quiz-answer="O(n log n)">O(n log n)</button>
+              <button type="button" class="btn btn-muted" data-quiz-answer="O(n^2)">O(n^2)</button>
+            </div>
+            <p class="form-note" id="quiz-note"></p>
+          </article>
+
+          <article class="gamified-game-card" id="output-game-card">
+            <p class="tiny-label">Guess Output</p>
+            <h3>JavaScript Output Game</h3>
+            <pre class="gm-code">const arr = [2, 4, 6];
+console.log(arr.map((x) => x / 2).join("-"));</pre>
+            <div class="quiz-options">
+              <button type="button" class="btn btn-muted" data-output-answer="1-2-3">1-2-3</button>
+              <button type="button" class="btn btn-muted" data-output-answer="2-4-6">2-4-6</button>
+              <button type="button" class="btn btn-muted" data-output-answer="3-2-1">3-2-1</button>
+            </div>
+            <p class="form-note" id="output-note"></p>
+          </article>
+
+          <article class="gamified-game-card" id="daily-challenge-card">
+            <p class="tiny-label">Daily Mission</p>
+            <h3 id="daily-title">Daily Challenge</h3>
+            <p id="daily-description"></p>
+            <button id="daily-complete-btn" class="btn btn-primary" type="button">Complete Daily Challenge (+20)</button>
+            <p class="form-note" id="daily-note"></p>
+          </article>
+
+          <article class="gamified-game-card" id="speed-card">
+            <p class="tiny-label">Speed Challenge</p>
+            <h3>Fastest Correct Answer</h3>
+            <p>Type the output: <strong>[1,2,3].map((x) =&gt; x * 2).join("-")</strong></p>
+            <div class="speed-actions">
+              <button class="btn btn-muted" id="speed-start-btn" type="button">Start Timer</button>
+              <input id="speed-answer" type="text" placeholder="Type answer here" />
+              <button class="btn btn-primary" id="speed-submit-btn" type="button">Submit</button>
+            </div>
+            <p class="form-note" id="speed-note"></p>
+          </article>
+
+          <article class="gamified-game-card" id="puzzle-card">
+            <p class="tiny-label">Code Puzzle</p>
+            <h3>System Design Mini-Puzzle</h3>
+            <p>Best data structure combo to implement an LRU cache efficiently?</p>
+            <div class="quiz-options">
+              <button type="button" class="btn btn-muted" data-puzzle-answer="array">Array + Stack</button>
+              <button type="button" class="btn btn-muted" data-puzzle-answer="hash-dll">HashMap + Doubly Linked List</button>
+              <button type="button" class="btn btn-muted" data-puzzle-answer="queue">Queue + Set</button>
+            </div>
+            <p class="form-note" id="puzzle-note"></p>
+          </article>
+
+          <article class="gamified-game-card">
+            <p class="tiny-label">Leaderboard</p>
+            <h3>Top Learners</h3>
+            <div id="leaderboard-list" class="leaderboard-list"></div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-intro">
+          <h2>Badge Vault</h2>
+          <p>Unlock badges by solving, helping peers, and showing consistency.</p>
+        </div>
+        <div id="badge-grid" class="badge-grid"></div>
+      </section>
+
+      <section class="section reveal">
+        <div class="section-intro">
+          <h2>Recent Activity</h2>
+          <p>Last actions that changed your score and progress.</p>
+        </div>
+        <ul id="activity-feed" class="mini-list"></ul>
+      </section>
+    </main>
+
+    <footer class="footer section page-wrap">
+      <p class="founder">Connect with us</p>
+      <div class="socials social-icons">
+        <a href="https://www.linkedin.com/company/brahma-code/" aria-label="LinkedIn" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-linkedin-in"></i></a>
+        <a href="https://x.com/brahmacode111?s=20" aria-label="Twitter X" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-x-twitter"></i></a>
+        <a href="https://www.facebook.com/profile.php?id=61577202107066" aria-label="Facebook" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-facebook-f"></i></a>
+        <a href="https://www.instagram.com/brahmacode111/?utm_source=ig_web_button_share_sheet" aria-label="Instagram" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-instagram"></i></a>
+        <a href="mailto:brahmacode111@gmail.com" aria-label="Email BrahmaCode" target="_blank" rel="noopener noreferrer"><i class="fa-solid fa-envelope"></i></a>
+      </div>
+      <p class="copy">BrahmaCode © 2026 • Learn with consistency, win with momentum.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="data-store.js"></script>
+    <script src="gamified.js"></script>
+    <script src="portal.js"></script>
+    <script src="firebase-config.js"></script>
+    <script src="admin.js"></script>
+  </body>
+</html>

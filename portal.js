@@ -10,6 +10,11 @@
     return date.toLocaleDateString('en-IN', { year: 'numeric', month: 'short', day: 'numeric' });
   }
 
+  function awardGamified(actionType, options) {
+    if (!window.BCGamify || typeof window.BCGamify.awardPoints !== 'function') return;
+    window.BCGamify.awardPoints(actionType, options || {});
+  }
+
   function applyWebsiteSettings() {
     if (!window.BCStore) return;
     const settings = window.BCStore.getSettings();
@@ -194,6 +199,10 @@
       window.BCStore.saveSubmission(problem.id, editor.value);
       note.textContent = 'Code submitted successfully (prototype save).';
       note.classList.add('success');
+      awardGamified('problem_solved', {
+        key: `problem-solved-${problem.id}`,
+        reason: `Solved problem: ${problem.title}`
+      });
     });
 
     runBtn?.addEventListener('click', () => {
