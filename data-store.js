@@ -1,4 +1,4 @@
-(function () {
+﻿(function () {
   const STORE_KEY = 'bc_portal_data_v1';
 
   const defaults = {
@@ -158,7 +158,7 @@
         source: 'Infosys',
         description: 'Off-campus hiring drive open for 2026 graduates across India with online assessment round.',
         date: '2026-04-10',
-        link: 'https://www.linkedin.com/jobs/'
+        link: 'https://www.naukri.com/'
       },
       {
         id: 'upd-2',
@@ -176,7 +176,7 @@
         source: 'CoderStack Labs',
         description: 'Startup internship role with stipend, mentorship, and a real product sprint for learners.',
         date: '2026-04-06',
-        link: 'https://www.linkedin.com/jobs/'
+        link: 'https://www.naukri.com/'
       },
       {
         id: 'upd-4',
@@ -470,3 +470,4 @@
     generateId
   };
 })();
+

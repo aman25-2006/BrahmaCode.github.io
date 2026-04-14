@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --bg: #04070f;
   --paper: rgba(18, 27, 52, 0.74);
   --ink: #ecf3ff;
@@ -1125,6 +1125,9 @@ body::before {
   align-items: center;
   justify-content: center;
   font-size: 1.06rem;
+  font-family: "Sora", sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
   transition: transform 0.24s ease, box-shadow 0.24s ease, border-color 0.24s ease, color 0.24s ease;
 }
 
@@ -2261,3 +2264,4 @@ body::before {
     align-items: flex-start;
   }
 }
+
