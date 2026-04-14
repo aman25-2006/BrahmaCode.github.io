@@ -163,14 +163,6 @@ body::before {
   margin-top: 56px;
 }
 
-.hero-brand-lockup {
-  width: min(460px, 92%);
-  height: auto;
-  display: block;
-  margin-bottom: 14px;
-  filter: drop-shadow(0 0 16px rgba(84, 132, 255, 0.32));
-}
-
 #home .hero {
   position: relative;
   max-width: none;
@@ -1141,14 +1133,6 @@ body::before {
   box-shadow: 0 0 18px rgba(100, 189, 255, 0.4);
 }
 
-.footer-brand-lockup {
-  width: min(320px, 82vw);
-  height: auto;
-  display: block;
-  margin-bottom: 10px;
-  filter: drop-shadow(0 0 12px rgba(85, 136, 255, 0.28));
-}
-
 .copy {
   margin-top: 11px;
   color: #8ea3ca;
@@ -1905,15 +1889,6 @@ body::before {
 
   #home .hero {
     padding: 28px 18px;
-  }
-
-  .hero-brand-lockup {
-    width: min(310px, 96%);
-    margin-bottom: 10px;
-  }
-
-  .footer-brand-lockup {
-    width: min(250px, 86vw);
   }
 
   #home .hero h1 {
