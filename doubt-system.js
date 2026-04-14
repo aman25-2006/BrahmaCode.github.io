@@ -8,6 +8,107 @@
   const LOCAL_VOTE_STORE_KEY = "bc_vote_store_v1";
 
   const DEFAULT_TAGS = ["DSA", "Python", "WebDev", "GATE", "Java", "JavaScript"];
+  const DEFAULT_DOUBTS = [
+    {
+      id: "doubt-seed-1",
+      title: "Why does my binary search fail on boundary values?",
+      description: "I tested my binary search on random arrays and it works, but it fails on arrays of size 1 and when target is at the end. How should I fix low/high updates safely?",
+      tags: ["DSA", "Java"],
+      code: "",
+      createdAt: Date.now() - 1000 * 60 * 50,
+      upvotes: 12,
+      answersCount: 1,
+      helpfulAnswerId: "answer-seed-1",
+      answers: [
+        {
+          id: "answer-seed-1",
+          text: "Use while (low <= high), compute mid as low + Math.floor((high - low) / 2), and update high = mid - 1 or low = mid + 1. Also test single-element arrays explicitly.",
+          createdAt: Date.now() - 1000 * 60 * 30,
+          upvotes: 7,
+          isHelpful: true
+        }
+      ]
+    },
+    {
+      id: "doubt-seed-2",
+      title: "Recursion stack overflow in tree traversal",
+      description: "My DFS traversal works for small trees but stack overflows for deep trees in JavaScript. Should I switch to iterative traversal for interviews?",
+      tags: ["DSA", "JavaScript"],
+      code: "",
+      createdAt: Date.now() - 1000 * 60 * 130,
+      upvotes: 9,
+      answersCount: 1,
+      helpfulAnswerId: "",
+      answers: [
+        {
+          id: "answer-seed-2",
+          text: "Yes, for very deep trees iterative DFS with an explicit stack is safer in JS. Mention both recursive and iterative approaches in interviews.",
+          createdAt: Date.now() - 1000 * 60 * 110,
+          upvotes: 5,
+          isHelpful: false
+        }
+      ]
+    },
+    {
+      id: "doubt-seed-3",
+      title: "Fetch API returns undefined on first render",
+      description: "I call API in page load but card values are undefined for a second and then update. What is the cleanest pattern to show loading state in plain JS?",
+      tags: ["WebDev", "JavaScript"],
+      code: "",
+      createdAt: Date.now() - 1000 * 60 * 200,
+      upvotes: 14,
+      answersCount: 2,
+      helpfulAnswerId: "",
+      answers: [
+        {
+          id: "answer-seed-3a",
+          text: "Render skeleton/loading text first, then replace with data after await fetch resolves.",
+          createdAt: Date.now() - 1000 * 60 * 180,
+          upvotes: 4,
+          isHelpful: false
+        },
+        {
+          id: "answer-seed-3b",
+          text: "Guard null values and return early when data is missing. This prevents undefined flashes.",
+          createdAt: Date.now() - 1000 * 60 * 170,
+          upvotes: 3,
+          isHelpful: false
+        }
+      ]
+    },
+    {
+      id: "doubt-seed-4",
+      title: "How to start Python for AI without strong math?",
+      description: "I am a beginner and want to get into AI but feel weak in advanced math. What should be my first 4-week learning roadmap?",
+      tags: ["Python", "AI"],
+      code: "",
+      createdAt: Date.now() - 1000 * 60 * 300,
+      upvotes: 16,
+      answersCount: 1,
+      helpfulAnswerId: "",
+      answers: [
+        {
+          id: "answer-seed-4",
+          text: "Start with Python basics, then data handling, then simple ML concepts with ready datasets. Focus on practical projects first.",
+          createdAt: Date.now() - 1000 * 60 * 280,
+          upvotes: 8,
+          isHelpful: false
+        }
+      ]
+    },
+    {
+      id: "doubt-seed-5",
+      title: "Best way to balance GATE prep with coding interviews",
+      description: "I have college classes plus GATE prep and placement prep. How do I create a weekly schedule that does not burn me out?",
+      tags: ["GATE", "DSA"],
+      code: "",
+      createdAt: Date.now() - 1000 * 60 * 420,
+      upvotes: 11,
+      answersCount: 0,
+      helpfulAnswerId: "",
+      answers: []
+    }
+  ];
 
   const state = {
     firebaseReady: false,
@@ -106,12 +207,13 @@
   function readLocalStore() {
     try {
       const parsed = JSON.parse(localStorage.getItem(LOCAL_DOUBT_STORE_KEY) || "{}");
+      const seededDoubts = Array.isArray(parsed.doubts) && parsed.doubts.length ? parsed.doubts : DEFAULT_DOUBTS;
       return {
-        doubts: Array.isArray(parsed.doubts) ? parsed.doubts : [],
-        tags: Array.isArray(parsed.tags) && parsed.tags.length ? parsed.tags : [...DEFAULT_TAGS]
+        doubts: seededDoubts,
+        tags: Array.isArray(parsed.tags) && parsed.tags.length ? parsed.tags : [...new Set([...DEFAULT_TAGS, "AI"])]
       };
     } catch {
-      return { doubts: [], tags: [...DEFAULT_TAGS] };
+      return { doubts: DEFAULT_DOUBTS, tags: [...new Set([...DEFAULT_TAGS, "AI"])] };
     }
   }
 

@@ -153,27 +153,48 @@
     updates: [
       {
         id: 'upd-1',
-        title: 'Infosys Hiring: Associate Software Engineer',
+        title: 'Associate Software Engineer Hiring',
         category: 'jobs',
-        description: 'Off-campus hiring drive open for 2026 graduates across India.',
+        source: 'Infosys',
+        description: 'Off-campus hiring drive open for 2026 graduates across India with online assessment round.',
         date: '2026-04-10',
         link: 'https://www.linkedin.com/jobs/'
       },
       {
         id: 'upd-2',
-        title: 'NIMCET 2026 Notification Released',
+        title: 'NIMCET 2026 Application Window Open',
         category: 'exams',
-        description: 'Registration dates, exam pattern, and eligibility details updated.',
+        source: 'NIMCET',
+        description: 'Registration dates, exam pattern, and eligibility details officially updated for MCA aspirants.',
         date: '2026-04-08',
         link: 'https://nimcet.in/'
       },
       {
         id: 'upd-3',
-        title: 'Frontend Internship: Remote Role',
+        title: 'Frontend Internship Program (Remote)',
         category: 'internships',
-        description: 'Startup internship role with stipend and mentorship for learners.',
+        source: 'CoderStack Labs',
+        description: 'Startup internship role with stipend, mentorship, and a real product sprint for learners.',
         date: '2026-04-06',
         link: 'https://www.linkedin.com/jobs/'
+      },
+      {
+        id: 'upd-4',
+        title: 'GATE CS 2027 Exam Calendar Announced',
+        category: 'exams',
+        source: 'IIT Organizing Institute',
+        description: 'Official exam dates, syllabus notice, and registration timeline published for GATE CS.',
+        date: '2026-04-04',
+        link: 'https://gate2027.iitk.ac.in/'
+      },
+      {
+        id: 'upd-5',
+        title: 'IIT JAM CS 2027 Notification Update',
+        category: 'exams',
+        source: 'IIT JAM',
+        description: 'Latest IIT JAM CS notice includes schedule timeline and updated subject-wise syllabus links.',
+        date: '2026-04-03',
+        link: 'https://jam2027.iitd.ac.in/'
       }
     ],
     articles: [
@@ -207,6 +228,39 @@
         examples: 'Input: s = "()[]{}"\\nOutput: true',
         starterCode:
           'function isValid(s) {\\n  // Write your solution here\\n  return false;\\n}'
+      },
+      {
+        id: 'prob-3',
+        title: 'Longest Substring Without Repeating Characters',
+        difficulty: 'medium',
+        description:
+          'Given a string s, find the length of the longest substring without repeating characters.',
+        constraints: '0 <= s.length <= 5 * 10^4; s consists of English letters, digits, symbols and spaces.',
+        examples: 'Input: s = "abcabcbb"\\nOutput: 3',
+        starterCode:
+          'function lengthOfLongestSubstring(s) {\\n  // Write your solution here\\n  return 0;\\n}'
+      },
+      {
+        id: 'prob-4',
+        title: 'Merge Intervals',
+        difficulty: 'hard',
+        description:
+          'Given an array of intervals where intervals[i] = [start, end], merge all overlapping intervals.',
+        constraints: '1 <= intervals.length <= 10^4; intervals[i].length == 2',
+        examples: 'Input: intervals = [[1,3],[2,6],[8,10],[15,18]]\\nOutput: [[1,6],[8,10],[15,18]]',
+        starterCode:
+          'function merge(intervals) {\\n  // Write your solution here\\n  return [];\\n}'
+      },
+      {
+        id: 'prob-5',
+        title: 'Binary Tree Level Order Traversal',
+        difficulty: 'easy',
+        description:
+          'Given the root of a binary tree, return the level order traversal of its nodes values.',
+        constraints: 'The number of nodes in the tree is in the range [0, 2000].',
+        examples: 'Input: root = [3,9,20,null,null,15,7]\\nOutput: [[3],[9,20],[15,7]]',
+        starterCode:
+          'function levelOrder(root) {\\n  // Write your solution here\\n  return [];\\n}'
       }
     ],
     bookmarks: {
@@ -221,13 +275,26 @@
     return `${prefix}-${Date.now()}-${Math.floor(Math.random() * 10000)}`;
   }
 
+  function mergeWithDefaults(storedList, defaultList) {
+    const base = Array.isArray(storedList) ? storedList : [];
+    const byId = new Map(base.map((item) => [item.id, item]));
+
+    defaultList.forEach((item) => {
+      if (!byId.has(item.id)) {
+        byId.set(item.id, item);
+      }
+    });
+
+    return Array.from(byId.values());
+  }
+
   function mergeDefaults(stored) {
     const merged = {
       settings: { ...defaults.settings, ...(stored.settings || {}) },
-      updates: Array.isArray(stored.updates) ? stored.updates : defaults.updates,
-      articles: Array.isArray(stored.articles) ? stored.articles : defaults.articles,
-      problems: Array.isArray(stored.problems) ? stored.problems : defaults.problems,
-      courses: Array.isArray(stored.courses) ? stored.courses : defaults.courses,
+      updates: mergeWithDefaults(stored.updates, defaults.updates),
+      articles: mergeWithDefaults(stored.articles, defaults.articles),
+      problems: mergeWithDefaults(stored.problems, defaults.problems),
+      courses: mergeWithDefaults(stored.courses, defaults.courses),
       bookmarks: {
         updates: Array.isArray(stored.bookmarks?.updates) ? stored.bookmarks.updates : [],
         problems: Array.isArray(stored.bookmarks?.problems) ? stored.bookmarks.problems : [],

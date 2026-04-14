@@ -39,10 +39,10 @@
       return `<article class="content-card">
         <p class="tiny-label">${item.category}</p>
         <h3>${item.title}</h3>
+        <p class="meta-row"><span>${item.source || 'BrahmaCode Network'}</span> • <span>${formatDate(item.date)}</span></p>
         <p>${item.description}</p>
-        <p class="meta-row"><span>${formatDate(item.date)}</span></p>
         <div class="card-actions">
-          <a class="btn btn-primary" href="${item.link}" target="_blank" rel="noopener noreferrer">Open</a>
+          <a class="btn btn-primary" href="${item.link}" target="_blank" rel="noopener noreferrer">Apply Now</a>
           <button type="button" class="btn btn-muted bookmark-btn" data-bookmark-type="updates" data-id="${item.id}">${bookmarked ? 'Saved' : 'Save'}</button>
         </div>
       </article>`;
@@ -60,12 +60,12 @@
       </article>`;
     }
 
-    return `<article class="content-card">
-      <p class="tiny-label">${item.difficulty}</p>
+    return `<article class="content-card problem-preview-card">
+      <p class="tiny-label">${item.difficulty} difficulty</p>
       <h3>${item.title}</h3>
       <p>${item.description.slice(0, 120)}...</p>
       <div class="card-actions">
-        <a class="btn btn-primary" href="problem.html?id=${encodeURIComponent(item.id)}">Solve</a>
+        <a class="btn btn-primary" href="problem.html?id=${encodeURIComponent(item.id)}">Solve Now</a>
         <button type="button" class="btn btn-muted bookmark-btn" data-bookmark-type="problems" data-id="${item.id}">${bookmarked ? 'Saved' : 'Save'}</button>
       </div>
     </article>`;

@@ -120,6 +120,12 @@ function escapeText(value) {
 
 function renderCourseCard(course, options = {}) {
   const progress = getCourseProgress(course);
+  const iconByCategory = {
+    'Web Development': 'WD',
+    'Data Structures & Algorithms': 'DSA',
+    'Python / AI': 'AI'
+  };
+  const courseIcon = course.icon || iconByCategory[course.category] || 'BC';
   const featuredTag = course.featured ? '<span class="course-chip">Featured</span>' : '';
   const popularTag = course.popular ? '<span class="course-chip course-chip-soft">Popular</span>' : '';
   const compactClass = options.compact ? ' course-card-compact' : '';
@@ -130,6 +136,7 @@ function renderCourseCard(course, options = {}) {
   return `<article class="course-card${compactClass}" data-course-card data-title="${escapeText(course.title)}" data-level="${escapeText(course.level)}" data-category="${escapeText(course.category)}">
     <div class="course-card-head">
       <div>
+        <span class="course-icon" aria-hidden="true">${escapeText(courseIcon)}</span>
         <p class="course-category">${escapeText(course.category)}</p>
         <h3>${escapeText(course.title)}</h3>
       </div>

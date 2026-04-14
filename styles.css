@@ -1,5 +1,5 @@
 :root {
-  --bg: #060813;
+  --bg: #04070f;
   --paper: rgba(18, 27, 52, 0.74);
   --ink: #ecf3ff;
   --muted: #a7b4d1;
@@ -15,6 +15,10 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: "Inter", sans-serif;
@@ -25,6 +29,29 @@ body {
     radial-gradient(circle at 52% 88%, rgba(46, 97, 255, 0.2), transparent 44%),
     linear-gradient(165deg, #05060f 0%, #091026 58%, #05070f 100%);
   line-height: 1.55;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: -25% -10%;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 30% 24%, rgba(64, 133, 255, 0.22), transparent 32%),
+    radial-gradient(circle at 75% 35%, rgba(152, 87, 255, 0.18), transparent 35%);
+  filter: blur(18px);
+  animation: neonDrift 11s ease-in-out infinite alternate;
+  z-index: -1;
+}
+
+@keyframes neonDrift {
+  from {
+    transform: translate3d(-1.5%, -1.5%, 0) scale(1);
+  }
+  to {
+    transform: translate3d(2%, 1.2%, 0) scale(1.03);
+  }
 }
 
 .top-nav {
@@ -74,6 +101,8 @@ body {
 .top-nav nav {
   display: flex;
   gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
 .menu-toggle {
@@ -97,6 +126,19 @@ body {
 .top-nav a:hover {
   color: #f3f7ff;
   text-shadow: 0 0 10px rgba(102, 213, 255, 0.55);
+}
+
+.nav-auth-link {
+  border: 1px solid rgba(120, 164, 244, 0.34);
+  border-radius: 999px;
+  padding: 6px 12px;
+}
+
+.nav-auth-primary {
+  background: linear-gradient(125deg, #2466ff 0%, #6d57ff 54%, #1fc8ff 100%);
+  color: #f8fcff !important;
+  border-color: rgba(138, 171, 255, 0.56);
+  box-shadow: 0 0 16px rgba(82, 127, 255, 0.34);
 }
 
 .page-wrap {
@@ -169,6 +211,7 @@ body {
 
 .btn:hover {
   transform: translateY(-2px);
+  filter: brightness(1.05);
 }
 
 .btn-primary {
@@ -233,7 +276,7 @@ body {
 }
 
 .content-card:hover {
-  transform: translateY(-4px);
+  transform: translateY(-4px) scale(1.01);
   border-color: rgba(133, 206, 255, 0.5);
   box-shadow: 0 14px 30px rgba(5, 11, 22, 0.48);
 }
@@ -616,6 +659,21 @@ body {
   color: #8fa4ce;
 }
 
+.course-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.4px;
+  background: linear-gradient(145deg, rgba(44, 101, 255, 0.45), rgba(105, 93, 255, 0.35));
+  border: 1px solid rgba(129, 165, 248, 0.42);
+}
+
 .hero-stat-card strong {
   display: block;
   font-family: "Sora", sans-serif;
@@ -687,6 +745,13 @@ body {
 
 .course-card {
   padding: 18px;
+  transition: transform 0.24s ease, border-color 0.24s ease, box-shadow 0.24s ease;
+}
+
+.course-card:hover {
+  transform: translateY(-4px) scale(1.01);
+  border-color: rgba(130, 200, 255, 0.6);
+  box-shadow: 0 16px 34px rgba(4, 12, 25, 0.48);
 }
 
 .course-card-compact {
@@ -802,6 +867,47 @@ body {
 .experience-card,
 .detail-panel {
   padding: 18px;
+}
+
+.cta-panel {
+  text-align: center;
+  padding: 30px 22px;
+  border-radius: 20px;
+  border: 1px solid rgba(129, 168, 244, 0.3);
+  background: linear-gradient(160deg, rgba(20, 35, 74, 0.65), rgba(15, 26, 52, 0.85));
+  box-shadow: var(--shadow);
+}
+
+.cta-panel h2 {
+  margin: 0 0 8px;
+  font-family: "Sora", sans-serif;
+}
+
+.cta-panel p {
+  margin: 0;
+  color: #b4c6e9;
+}
+
+.cta-panel .hero-cta {
+  justify-content: center;
+}
+
+#home .saas-grid .glass-card .content-grid {
+  grid-template-columns: 1fr;
+  margin-top: 8px;
+}
+
+#code-editor {
+  width: 100%;
+  margin-top: 8px;
+  border-radius: 12px;
+  border: 1px solid rgba(128, 164, 232, 0.42);
+  background: rgba(8, 16, 32, 0.88);
+  color: #e8f1ff;
+  font-family: "Consolas", "Courier New", monospace;
+  font-size: 0.94rem;
+  line-height: 1.45;
+  padding: 12px;
 }
 
 .detail-panel h2 {

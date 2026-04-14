@@ -33,296 +33,115 @@
       </button>
       <nav id="main-nav">
         <a href="index.html">Home</a>
-        <a href="jobs.html">Jobs</a>
+        <a href="courses.html">Courses</a>
         <a href="practice.html">Practice</a>
         <a href="ask-doubt.html">Doubts</a>
+        <a href="jobs.html">Jobs</a>
         <a href="admin-login.html">Admin</a>
+        <a href="google-login.html" class="nav-auth-link">Login</a>
+        <a href="google-login.html" class="nav-auth-link nav-auth-primary">Signup</a>
       </nav>
     </header>
 
     <main id="home" class="page-wrap">
       <section class="hero section reveal">
-        <p class="tiny-label">AI-powered learning cloud • startup grade experience</p>
-        <h1 data-edit-key="home.heroTitle">Build Skills Faster With AI + Community.</h1>
-        <p class="tiny-label">BrahmaCode Developer Intelligence Platform</p>
+        <p class="tiny-label">high-tech learning cloud • built for indian students</p>
+        <h1 data-edit-key="home.heroTitle">India’s AI-Powered Coding &amp; Career Platform</h1>
         <p class="hero-subtext" data-edit-key="home.heroSubtext">
-          BrahmaCode combines coding practice, collaborative doubt solving,
-          and guided progress analytics in one clean workspace built for modern
-          student developers.
+          Practice coding, solve doubts, and get job updates — all in one place.
         </p>
         <div class="hero-cta">
-          <a class="btn btn-primary" href="courses.html">Start Learning</a>
-          <a class="btn btn-muted" href="ask-doubt.html">Open Doubt Hub</a>
+          <a class="btn btn-primary" href="courses.html">Get Started</a>
+          <a class="btn btn-muted" href="#platform-preview">Explore Platform</a>
         </div>
-        <div class="hero-note">
-          <span data-edit-key="home.heroNote">Built with realtime data, glass UI, and focus-first learning flow.</span>
+        <p class="hero-note" data-edit-key="home.heroNote">Premium UI, focused workflows, and beginner-friendly paths.</p>
+      </section>
+
+      <section id="features" class="section reveal">
+        <div class="section-intro">
+          <h2>Core Features</h2>
+          <p>Everything a student needs from first practice to final placement.</p>
+        </div>
+        <div class="feature-cards">
+          <article class="fcard">
+            <div class="icon">&lt;/&gt;</div>
+            <h3>Coding Practice</h3>
+            <p>LeetCode-like problem cards, difficulty filters, and solve flow.</p>
+          </article>
+          <article class="fcard">
+            <div class="icon">AI</div>
+            <h3>Ask Doubts</h3>
+            <p>Community + AI assisted explanations with tags, likes, and answers.</p>
+          </article>
+          <article class="fcard">
+            <div class="icon">UPD</div>
+            <h3>Jobs &amp; Exam Updates</h3>
+            <p>LinkedIn-style updates for internships, jobs, and exam notifications.</p>
+          </article>
         </div>
       </section>
 
       <section class="section reveal">
         <div class="section-intro">
-          <h2>AI Command Center</h2>
-          <p>One dashboard view for activity, coding progress, and active doubts.</p>
+          <h2>How It Works</h2>
+          <p>Simple 3-step flow from learning to opportunities.</p>
         </div>
+        <div class="path-grid">
+          <article class="path-card">
+            <p class="course-category">Step 1</p>
+            <h3>Learn &amp; Practice</h3>
+            <p>Pick a path and solve curated problems with guided modules.</p>
+          </article>
+          <article class="path-card">
+            <p class="course-category">Step 2</p>
+            <h3>Ask &amp; Solve Doubts</h3>
+            <p>Post coding issues, get answers, and upvote helpful explanations.</p>
+          </article>
+          <article class="path-card">
+            <p class="course-category">Step 3</p>
+            <h3>Get Jobs &amp; Opportunities</h3>
+            <p>Track internships, freshers jobs, and exam deadlines in one feed.</p>
+          </article>
+        </div>
+      </section>
 
+      <section id="platform-preview" class="dashboard section reveal">
+        <div class="section-intro">
+          <h2>Dashboard Preview</h2>
+          <p>A single command center for coding problems, doubt feed, and job updates.</p>
+        </div>
         <div class="saas-grid">
           <article class="glass-card">
-            <p class="tiny-label">Recent Activity</p>
-            <h3>Today in BrahmaCode</h3>
-            <ul class="mini-list">
-              <li>4 problems solved in arrays module</li>
-              <li>2 doubts answered by community mentors</li>
-              <li>1 interview article saved for revision</li>
-            </ul>
+            <p class="tiny-label">Coding Problems</p>
+            <h3>Recommended Practice Queue</h3>
+            <div id="home-problems-list" class="content-grid"></div>
           </article>
-
           <article class="glass-card">
-            <p class="tiny-label">Coding Queue</p>
-            <h3>Recommended Next Problems</h3>
+            <p class="tiny-label">Doubt Feed</p>
+            <h3>Live Community Activity</h3>
             <ul class="mini-list">
-              <li>Sliding Window - medium</li>
-              <li>Graph BFS basics - medium</li>
-              <li>Binary Search on Answers - hard</li>
+              <li>#DSA: Why two-pointer fails on sorted negatives?</li>
+              <li>#Python: Recursion base case confusion in tree traversal</li>
+              <li>#WebDev: Fetch API returns undefined on first render</li>
             </ul>
+            <a class="btn btn-muted" href="ask-doubt.html">Open Doubt Feed</a>
           </article>
-
           <article class="glass-card">
-            <p class="tiny-label">Doubt Radar</p>
-            <h3>Open Doubts Needing Attention</h3>
-            <ul class="mini-list">
-              <li>#DSA recursion dry run confusion</li>
-              <li>#WebDev async await API errors</li>
-              <li>#GATE algorithm complexity questions</li>
-            </ul>
+            <p class="tiny-label">Career Updates</p>
+            <h3>Jobs + Exams Feed</h3>
+            <div id="home-updates-list" class="content-grid"></div>
           </article>
         </div>
       </section>
 
-      <section id="features" class="features section reveal odd-shift-light">
-        <div class="section-intro">
-          <h2>Platform Features</h2>
-          <p>A little rough around the edges, but strong where it matters.</p>
-        </div>
-
-        <div class="feature-cards">
-          <article class="fcard misaligned-1">
-            <div class="icon">💬</div>
-            <h3>Ask &amp; Answer</h3>
-            <p>Community questions + mentor-backed explanations.</p>
-          </article>
-          <article class="fcard misaligned-2">
-            <div class="icon">🧑‍🏫</div>
-            <h3>1:1 Doubt Chat</h3>
-            <p>Personal support when your bug refuses to move.</p>
-          </article>
-          <article class="fcard misaligned-3">
-            <div class="icon">📘</div>
-            <h3>Premium Solutions</h3>
-            <p>Step-by-step breakdown for selected tough problems.</p>
-          </article>
-          <article class="fcard misaligned-4">
-            <div class="icon">🏅</div>
-            <h3>XP &amp; Badges</h3>
-            <p>Track effort and celebrate small wins, daily.</p>
-          </article>
-        </div>
-      </section>
-
-      <section id="batches" class="section reveal" data-section-key="showBatches">
-        <div class="section-intro">
-          <h2>Competitive Tech Exam Batches</h2>
-          <p>Structured preparation for NIMCET, GATE, IIT JAM, and other tech-focused competitive exams.</p>
-        </div>
-        <div class="batch-grid">
-          <article class="batch-card">
-            <p class="tiny-label">Batch A</p>
-            <h3>NIMCET Complete Prep</h3>
-            <p>Mon, Wed, Fri • 7:00 PM IST • Daily homework tracker included.</p>
-            <span class="batch-seat">Seats left: 42</span>
-          </article>
-          <article class="batch-card featured-batch">
-            <p class="tiny-label">Most Popular</p>
-            <h3>GATE CS + Aptitude Booster</h3>
-            <p>Tue, Thu, Sat • 8:30 PM IST • Weekly interview simulation.</p>
-            <span class="batch-seat">Seats left: 17</span>
-          </article>
-          <article class="batch-card">
-            <p class="tiny-label">Weekend</p>
-            <h3>IIT JAM + Core CS Practice</h3>
-            <p>Sat, Sun • 10:00 AM IST • Beginner-friendly bilingual support.</p>
-            <span class="batch-seat">Seats left: 58</span>
-          </article>
-        </div>
-      </section>
-
-      <section id="results" class="section reveal odd-shift" data-section-key="showResults">
-        <div class="section-intro">
-          <h2>Results Snapshot</h2>
-          <p>Consistent learners tend to see faster gains in tests and interviews.</p>
-        </div>
-        <div class="result-strip">
-          <article class="result-pill">
-            <strong>86%</strong>
-            <span>Students improved weekly test scores in 8 weeks</span>
-          </article>
-          <article class="result-pill">
-            <strong>2.4x</strong>
-            <span>Average increase in solved DSA problems per month</span>
-          </article>
-          <article class="result-pill">
-            <strong>1,200+</strong>
-            <span>Doubts resolved with mentor explanations this quarter</span>
-          </article>
-        </div>
-      </section>
-
-      <section id="jobs-preview" class="section reveal odd-shift-light" data-section-key="showJobsSection">
-        <div class="section-intro">
-          <h2>Jobs &amp; Exam Updates</h2>
-          <p>Fresh internships, hiring notifications, and latest exam alerts in one place.</p>
-        </div>
-        <div id="home-updates-list" class="content-grid"></div>
-      </section>
-
-      <section id="practice-preview" class="section reveal" data-section-key="showPracticeSection">
-        <div class="section-intro">
-          <h2>Coding Practice</h2>
-          <p>Practice problems with clear statements and difficulty levels.</p>
-        </div>
-        <div id="home-problems-list" class="content-grid"></div>
-      </section>
-
-      <section id="articles-preview" class="section reveal odd-shift" data-section-key="showArticlesSection">
-        <div class="section-intro">
-          <h2>Latest Articles</h2>
-          <p>Practical tips on coding, interviews, exams, and growth.</p>
-        </div>
-        <div id="home-articles-list" class="content-grid"></div>
-      </section>
-
-      <section class="section reveal odd-shift-light">
-        <div class="section-intro">
-          <h2>NIMCET Marks College Finder (Quick Demo)</h2>
-          <p>Estimate your expected NIMCET rank bracket from your mock score.</p>
-        </div>
-        <form id="rank-predictor" class="predictor-card">
-          <label for="exam-score">Enter NIMCET mock score (out of 1000)</label>
-          <input id="exam-score" type="number" min="0" max="1000" placeholder="e.g. 712" required />
-          <button type="submit" class="btn btn-primary">Find College Rank Range</button>
-          <p id="predictor-note" class="form-note">This is a guidance estimate for NIMCET prep, not an official rank.</p>
-        </form>
-      </section>
-
-      <section class="audience section reveal">
-        <div class="section-intro">
-          <h2>Who Is This For?</h2>
-          <p>If you want to become consistent, this is for you.</p>
-        </div>
-        <div class="audience-row">
-          <div>College students (BCA / B.Tech)</div>
-          <div>School students (Class 9-12)</div>
-          <div>English and Hindi-medium learners</div>
-        </div>
-      </section>
-
-      <section class="dashboard section reveal">
-        <div class="section-intro">
-          <h2>Student Dashboard Preview</h2>
-          <p>Demo view: simple, readable, no extra noise.</p>
-        </div>
-
-        <!-- Fake dashboard preview intentionally kept realistic and simple -->
-        <div class="dashboard-card">
-          <div class="dash-head">
-            <h3>Hey Priya, your streak is safe today too 🔥</h3>
-            <span>Week 14</span>
+      <section class="section reveal">
+        <div class="cta-panel">
+          <h2>Start Your Coding Journey Today</h2>
+          <p>Join BrahmaCode to level up your coding, confidence, and career opportunities.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="courses.html">Start Learning</a>
+            <a class="btn btn-muted" href="jobs.html">View Opportunities</a>
           </div>
-
-          <div class="dash-stats">
-            <div class="stat">
-              <p class="label">Current XP</p>
-              <strong>1280</strong>
-            </div>
-            <div class="stat">
-              <p class="label">Streak</p>
-              <strong>9 days</strong>
-            </div>
-            <div class="stat">
-              <p class="label">Solved</p>
-              <strong>42 questions</strong>
-            </div>
-          </div>
-
-          <div class="progress-wrap">
-            <div class="progress-meta">
-              <span>DSA Roadmap Progress</span>
-              <span id="progress-value">68%</span>
-            </div>
-            <div class="progress-track">
-              <div class="progress-fill" id="progress-fill"></div>
-            </div>
-          </div>
-
-          <div class="task-list">
-            <p>Next up:</p>
-            <ul>
-              <li>Binary Search revision</li>
-              <li>2-pointer pattern practice</li>
-              <li>One mock interview round</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      <section id="pricing" class="pricing section reveal" data-section-key="showPricing">
-        <div class="section-intro">
-          <h2>Pricing</h2>
-          <p>We keep it affordable. Student budget comes first.</p>
-        </div>
-
-        <div class="pricing-grid">
-          <article class="price-card">
-            <h3>Free</h3>
-            <p class="price">₹0</p>
-            <p>Basic problems, selected community answers, starter roadmap.</p>
-          </article>
-          <article class="price-card highlighted">
-            <h3>Brahma Pass</h3>
-            <p class="price">₹299/mo*</p>
-            <p>Priority doubt help, premium solutions, XP boosts, focused plans.</p>
-          </article>
-          <article class="price-card">
-            <h3>Courses</h3>
-            <p class="price">From ₹999</p>
-            <p>Topic-specific cohorts, assignments, and feedback sessions.</p>
-          </article>
-        </div>
-
-        <p class="pricing-note">Pricing coming soon</p>
-      </section>
-
-      <section id="faq" class="section reveal" data-section-key="showFaq">
-        <div class="section-intro">
-          <h2>Frequently Asked Questions</h2>
-          <p>Short answers to the doubts students ask most.</p>
-        </div>
-        <div class="faq-list" id="faq-list">
-          <article class="faq-item">
-            <button class="faq-question" type="button">Do I get class recordings if I miss live sessions?</button>
-            <p class="faq-answer">Yes. Every live class is uploaded within 12 hours with time-stamped notes.</p>
-          </article>
-          <article class="faq-item">
-            <button class="faq-question" type="button">Can school and college students both join the same batch?</button>
-            <p class="faq-answer">For core coding yes, but advanced interview modules are split by level.</p>
-          </article>
-          <article class="faq-item">
-            <button class="faq-question" type="button">How quickly can I expect doubt resolution?</button>
-            <p class="faq-answer">Most active doubts are handled in under 24 hours during support windows.</p>
-          </article>
-          <article class="faq-item">
-            <button class="faq-question" type="button">Is there a low-cost plan for beginners?</button>
-            <p class="faq-answer">Yes. Start with the free track and upgrade only when you need mentor priority.</p>
-          </article>
         </div>
       </section>
     </main>
