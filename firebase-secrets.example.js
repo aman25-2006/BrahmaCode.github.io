@@ -7,5 +7,10 @@ window.BRAHMACODE_FIREBASE_CONFIG_PRIVATE = {
   storageBucket: '',
   messagingSenderId: '',
   appId: '',
-  measurementId: ''
+  measurementId: '',
+
+  // Live AI chatbot config (Gemini)
+  aiApiKey: '',
+  aiModel: 'gemini-1.5-flash',
+  aiEndpoint: ''
 };

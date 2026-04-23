@@ -10,6 +10,12 @@
     measurementId: ''
   };
 
+  const EMPTY_AI = {
+    apiKey: '',
+    model: 'gemini-1.5-flash',
+    endpoint: ''
+  };
+
   function sanitizeConfig(config) {
     if (!config || typeof config !== 'object') {
       return { ...EMPTY };
@@ -29,6 +35,14 @@
   function setPublicConfig() {
     const privateConfig = window.BRAHMACODE_FIREBASE_CONFIG_PRIVATE;
     window.BRAHMACODE_FIREBASE_CONFIG = sanitizeConfig(privateConfig);
+
+    const privateAiConfig = window.BRAHMACODE_AI_CONFIG_PRIVATE || privateConfig;
+    window.BRAHMACODE_AI_CONFIG = {
+      ...EMPTY_AI,
+      apiKey: String(privateAiConfig?.aiApiKey || privateAiConfig?.apiKey || '').trim(),
+      model: String(privateAiConfig?.aiModel || EMPTY_AI.model).trim() || EMPTY_AI.model,
+      endpoint: String(privateAiConfig?.aiEndpoint || '').trim()
+    };
   }
 
   setPublicConfig();
